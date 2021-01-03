@@ -15,8 +15,11 @@ void main()
 
   load_screen_driver();
 
-  enter_shell();
 
-  print("end of the kernel");
-  __asm__ __volatile__("cli");
+  
+
+  //enter_shell();
+
+  //print("end of the kernel");
+  //__asm__ __volatile__("cli");
 }

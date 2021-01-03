@@ -10,13 +10,15 @@
 * Keyboard driver
 * Ata driver
 * Pci driver
+* Shell
 
 ### Working on
 
-* Shell
+* Debugging the timer callback
+* PC Speaker
 
 ### Next features
 
-* Call 16 bit mode
+* Call 16 bit mode (from the c code)
 * Load the second kernel
 
