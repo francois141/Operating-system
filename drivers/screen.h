@@ -5,21 +5,40 @@
 #include "../drivers/low_level.h"
 #include "../system_lib/system.h"
 
-#define VIDEO_ADDRESS (char *)0xb8000
-#define MAX_ROWS 25
-#define MAX_COLS 80
 
-#define WHITE_ON_BLACK 0x0f
-#define WHITE_ON_RED   0x0a
+#define VIDEO_ADDRESS (char *)0xa0000
+#define MAX_ROWS 28
+#define MAX_COLS 45
 
-#define REG_SCREEN_CTRL 0x3d4
-#define REG_SCREEN_DATA 0x3d5
+#define ROW_SIZE 320
+#define COLUMN_SIZE 200
+
+#define CHAR_SIZE 7
+
+typedef struct
+{
+    u8 cursorX;
+    u8 cursorY;
+} Screen_settings;
+
+static Screen_settings screen_settings;
 
 void load_screen_driver();
+void clear_screen();
 
-void print_char(char,int,int,char);
+int get_cursor_offset();
+void set_cursor_offset(int);
+
+int get_screen_offset(int col, int row);
+int get_screen_offset_row(int offset);
+int get_screen_offset_col(int offset);  
+int handle_scrolling(int);
+
 void print(char*);
-void print_at(char*,int,int);
+
+static void new_line();
+
+void remove_last_char();
 
 void putch(char);
 
@@ -28,12 +47,6 @@ void print_word(u16);
 void print_long(u32);
 void print_number(u32);
 
-void clear_screen();
-int get_cursor_offset();
-void set_cursor_offset(int);
-int get_screen_offset(int col, int row);
-int get_screen_offset_row(int offset);
-int get_screen_offset_col(int offset);  
-int handle_scrolling(int);
+
 
 #endif

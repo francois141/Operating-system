@@ -22,7 +22,6 @@
     ;load kernel into memory
     mov bx, 0x1000
     mov dh,50
-    ;mov dl,[BOOT_DRIVE]
 
     call load_from_disk
 

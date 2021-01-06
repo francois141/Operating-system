@@ -11,16 +11,11 @@ void enter_shell()
 
         key_buffer[--index] = 0;
 
-        /***
-         *  TODO: Create a command datastructure
-         *  TODO: Create a parser for the commands
-         */
-
         parse_command();
 
 
         clear_buffer();
-        print(">> ");
+        print(">>");
     }    
 }
 
@@ -51,6 +46,7 @@ static void parse_command()
         else if(COMMAND("clear"))
         {
             clear_screen();
+            set_cursor_offset(0);
         }
         else
         {
@@ -75,8 +71,17 @@ void add_key(char input)
         print("Error TOO MUCH KEY"); 
         return;
     }
+    if(input == 0x8)
+    {
+        if(index == 0)
+            return;
+        remove_last_char();
+        index--;
+    }
+    else
+    {
+        putch(input);
+        key_buffer[index++] = input;
+    }
 
-    putch(input);
-
-    key_buffer[index++] = input;
 }

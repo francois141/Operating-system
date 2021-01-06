@@ -22,7 +22,7 @@ set_cursor_line:
     ret
 
 set_graphics_mode:
-    mov al, 0x03
+    mov al, 0x13
 	mov ah, 0
 	int 0x10
 
