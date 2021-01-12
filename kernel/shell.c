@@ -31,7 +31,7 @@ static void parse_command()
             print("lspci : analyser PCI\n");
             print("read disk : lire le contenu du disque\n");
             print("clear : nettoyer l'ecran\n");
-            print("\n");
+            print("version : donne la version de l'os\n");
         }
         else if(COMMAND("lspci"))
         {
@@ -47,6 +47,10 @@ static void parse_command()
         {
             clear_screen();
             set_cursor_offset(0);
+        }
+        else if(COMMAND("version"))
+        {
+            print("Version 1.0.0 \n");
         }
         else
         {
@@ -77,6 +81,10 @@ void add_key(char input)
             return;
         remove_last_char();
         index--;
+    }
+    else if(input < 32 && input != 10)
+    {
+        return;
     }
     else
     {

@@ -32,7 +32,7 @@ void set_cursor_offset(int);
 int get_screen_offset(int col, int row);
 int get_screen_offset_row(int offset);
 int get_screen_offset_col(int offset);  
-int handle_scrolling(int);
+int handle_scrolling();
 
 void print(char*);
 

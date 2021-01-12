@@ -934,29 +934,28 @@ int get_screen_offset(int col, int row) { return row * MAX_COLS + col;}
 int get_screen_offset_row(int offset)   { return offset / MAX_COLS;}
 int get_screen_offset_col(int offset)   { return offset % MAX_COLS;}  
 
-int handle_scrolling(int cursor_offset)
+int handle_scrolling()
 {
-    /****
-     * TODO : Do it later
-     * 
-    /*if(cursor_offset < MAX_COLS * MAX_ROWS)
+    int cursor_offset = get_cursor_offset();
+    int rowNumber = get_screen_offset_row(cursor_offset);
+
+    if(rowNumber < MAX_ROWS)
     {
         return cursor_offset;
     }
-
-    for(int i = 1; i < MAX_ROWS;i++)
+    else
     {
-        memcpy(get_screen_offset(0,i) + VIDEO_ADDRESS, get_screen_offset(0,i-1) + VIDEO_ADDRESS,MAX_COLS);
+        int offset = ROW_SIZE;
+        for(int i = 7;i < COLUMN_SIZE;i++)
+        {
+            memcpy(VIDEO_ADDRESS + i*offset,VIDEO_ADDRESS + (i-7)*offset,320);
+        }
+        for(int i = 200 - 7; i < 200;i++)
+        {
+            memset(VIDEO_ADDRESS + i*offset,0,320);
+        }
+        screen_settings.cursorY--;
     }
-
-    char* last_line = get_screen_offset(0,MAX_ROWS-1) + VIDEO_ADDRESS;
-    for(int i = 0; i < MAX_COLS*2;i++){
-        last_line[i] = 0;
-    }
-
-    cursor_offset -= 2*MAX_COLS;
-
-    return cursor_offset;*/
 }
 
 void print(char* message)
@@ -968,6 +967,7 @@ void print(char* message)
         {
             new_line();
             i++;
+            handle_scrolling();
             continue;
         }
         int x = screen_settings.cursorX;
@@ -975,6 +975,7 @@ void print(char* message)
         write_char(y,x,ascii_to_array(message[i]));
         i++;
         set_cursor_offset(get_cursor_offset()+1);
+        handle_scrolling();
     }
 }
 
@@ -984,7 +985,6 @@ static void new_line()
     screen_settings.cursorX = 0;
 }
 
-
 void putch(char letter)
 {
     char *message = "Z";
@@ -992,6 +992,13 @@ void putch(char letter)
     print(message);
 }   
 
+u8 getHeight(){
+    return (u8)COLUMN_SIZE;
+}
+
+u8 getWidth(){
+    return (u8)ROW_SIZE;
+}
 
 static void print_hex(u8 _byte)
 {
