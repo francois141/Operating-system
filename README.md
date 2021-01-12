@@ -11,11 +11,14 @@
 * Ata driver
 * Pci driver
 * Shell
+* Timer & sleep_function
+* Basic math library
+* Basic graphics library
 
 ### Working on
 
-* Debugging the timer callback
-* PC Speaker
+* Improving the shell
+* Creating a beep driver
 
 ### Next features
 
