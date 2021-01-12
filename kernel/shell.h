@@ -3,6 +3,7 @@
 
 #include "../drivers/screen.h"
 #include "../system_lib/string.h"
+#include "../system_lib/system.h"
 #include "../drivers/pci.h"
 #include "../drivers/ata.h"
 #include "../drivers/keyboard.h"

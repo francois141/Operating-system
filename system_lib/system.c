@@ -1,3 +1,5 @@
+#include "system.h"
+
 void memcpy(char *source, char *dest, unsigned int nbBytes)
 {
     for(int i = 0; i < nbBytes;i++)
@@ -24,6 +26,13 @@ void int_to_ascii(int n, char str[]) {
 
     if (sign < 0) str[i++] = '-';
     str[i] = '\0';
+}
+
+void sleep(int milliseconds)
+{
+    tick = 0;
+    while(tick < milliseconds){}
+    return;
 }
 
 

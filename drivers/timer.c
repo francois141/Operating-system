@@ -1,21 +1,18 @@
 #include "timer.h"
-#include "isr.h"
-#include "../drivers/screen.h"
-#include "../drivers/low_level.h"
+#include "../cpu/isr.h"
+#include "screen.h"
+#include "low_level.h"
 
 u32 tick = 0;
 
 static void timer_callback(registers_t regs)
 {
     tick++;
-    print("Tick : ");
-    print_word(tick);
-    print("\n");
 }
 
 void init_timer(u32 frequency)
 {
-    register_interrupt_handler(IRQ0, &timer_callback);
+    register_interrupt_handler(IRQ0, timer_callback);
 
     u32 divisor = 1193180 / frequency;
 

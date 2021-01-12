@@ -1,12 +1,11 @@
 #include "../cpu/idt.h"
 #include "../cpu/isr.h"
-#include "../cpu/timer.h"
+#include "../drivers/timer.h"
 #include "../drivers/screen.h"
 #include "../drivers/keyboard.h"
 #include "../drivers/ata.h"
 #include "../drivers/pci.h"
 #include "shell.h"
-#include "../drivers/font.h"
 #include "../system_lib/graphics/libgui.h"
 
 
@@ -18,8 +17,7 @@ void main()
   __asm__ __volatile__("sti");
 
   load_screen_driver();
-
-  set_autorepeat_rate();
+  init_timer(1000);
   enter_shell();
 
 }

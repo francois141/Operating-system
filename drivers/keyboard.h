@@ -6,6 +6,9 @@
 #define RIGHT_ARROW 252
 #define DOWN_ARROW  253
 
+#define KEY_SHIFT_UP    0x2A
+#define KEY_SHIFT_DOWN  0xAA
+
 #define KEYBOARD_ENCODER_STATUS_BUFFER 0x60
 #define KEYBOARD_ENCODER_COMMAND_REG      0x60
 
@@ -19,6 +22,8 @@
 
 #include "../drivers/screen.h"
 #include "../kernel/shell.h"
+
+unsigned char key_pressed[256];
 
 void init_keyboard();
 

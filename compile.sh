@@ -8,7 +8,7 @@ gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/system.c -o system.o
 
 gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/idt.c -o idt.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/isr.c -o ist.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/timer.c -o timer.o
+gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/timer.c -o timer.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/keyboard.c -o keyboard.o
 
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/ata.c -o ata.o
