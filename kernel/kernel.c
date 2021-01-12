@@ -7,6 +7,8 @@
 #include "../drivers/pci.h"
 #include "shell.h"
 #include "../system_lib/graphics/libgui.h"
+#include "../drivers/pc_speaker.h"
+
 
 
 void main()
@@ -18,6 +20,8 @@ void main()
 
   load_screen_driver();
   init_timer(1000);
+
+  beep(1000);
   enter_shell();
 
 }
