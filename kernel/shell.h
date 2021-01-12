@@ -5,6 +5,7 @@
 #include "../system_lib/string.h"
 #include "../drivers/pci.h"
 #include "../drivers/ata.h"
+#include "../drivers/keyboard.h"
 
 #define KEY_EXECUTE key_buffer[index-1] == 0x0a
 #define NOT_KEY_EXECUTE key_buffer[index-1] != 0x0a

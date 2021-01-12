@@ -19,6 +19,7 @@ void main()
 
   load_screen_driver();
 
+  set_autorepeat_rate();
   enter_shell();
 
 }
