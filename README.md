@@ -19,6 +19,6 @@
 
 ### Next features
 
-* Call 16 bit mode (from the c code)
-* Load the second kernel
+* Small games
+
 

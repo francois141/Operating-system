@@ -885,10 +885,11 @@ int write_char(int y, int x,int index)
     for(int j = 0; j < 6;j++)
     {
       if(!(characters[index][i][j] == 0))
-        put_pixel(7*y+i,7*x+j,13);
+        put_pixel(y+i,x+j,13);
     }
   }
 }
+
 
 void clear_char(int y,int x)
 {
@@ -972,7 +973,7 @@ void print(char* message)
         }
         int x = screen_settings.cursorX;
         int y = screen_settings.cursorY;
-        write_char(y,x,ascii_to_array(message[i]));
+        write_char(7*y,7*x,ascii_to_array(message[i]));
         i++;
         set_cursor_offset(get_cursor_offset()+1);
         handle_scrolling();

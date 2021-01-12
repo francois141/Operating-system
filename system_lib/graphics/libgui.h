@@ -1,8 +1,9 @@
 #ifndef LIBGUI_H
 #define LIBGUI_H
 
-#include "cpu/types.h"
-#include "drivers/screen.h"
+#include "../../cpu/types.h"
+#include "../../drivers/screen.h"
+#include "../math.h"
 
 typedef struct{
     int width;
@@ -12,6 +13,8 @@ typedef struct{
 Screen_parameters screen_parameters;
 
 void initialiseLib();
+
+void drawLine(u8 y1,u8 x1,u8 y2,u8 x2);
 
 void drawRectangle(u8 y1,u8 x1,u8 y2,u8 x2,u8 width);
 void drawCircle(u8 y, u8 x, float radius, u8 width );

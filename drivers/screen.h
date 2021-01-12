@@ -47,6 +47,15 @@ void print_word(u16);
 void print_long(u32);
 void print_number(u32);
 
+u8 getHeight();
+u8 getWidth();
+
+void put_pixel(int,int,int);
+
+int write_char(int,int,int);
+
+int ascii_to_array(char);
+
 
 
 #endif
