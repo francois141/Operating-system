@@ -32,6 +32,7 @@ static void parse_command()
             print("read disk : lire le contenu du disque\n");
             print("clear : nettoyer l'ecran\n");
             print("version : donne la version de l'os\n");
+
         }
         else if(COMMAND("lspci"))
         {
@@ -40,7 +41,7 @@ static void parse_command()
         }     
         else if(COMMAND("read disk"))
         {
-            read_sectors_ATA_PIO(0,0,1);
+            read_sectors_ATA_PIO(0,40,1);
             print("\n");
         }
         else if(COMMAND("clear"))

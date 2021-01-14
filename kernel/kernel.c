@@ -19,9 +19,6 @@ void main()
   __asm__ __volatile__("sti");
 
   load_screen_driver();
-  init_timer(1000);
-
-  beep(1000);
   enter_shell();
-
 }
+

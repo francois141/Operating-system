@@ -18,7 +18,6 @@
     mov sp,bp
 
 
-
     ;load kernel into memory
     mov bx, 0x1000
     mov dh,50

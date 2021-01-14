@@ -30,6 +30,7 @@ void int_to_ascii(int n, char str[]) {
 
 void sleep(int milliseconds)
 {
+    return;
     tick = 0;
     while(tick < milliseconds){}
     return;
