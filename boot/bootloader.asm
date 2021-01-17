@@ -44,6 +44,8 @@ end:
 [bits 32]
 START_PM:
     mov ebx, load_kernel_msg
+    mov ebp, 0x90000
+    mov esp,ebp
     call print_string_pm
     call 0x1000
     jmp $

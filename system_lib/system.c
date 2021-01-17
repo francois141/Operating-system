@@ -14,6 +14,7 @@ void memset(char *address,char value, unsigned int nbBytes)
     {
         *(address + i) = value;
     }
+
 }
 
 void int_to_ascii(int n, char str[]) {
@@ -30,10 +31,13 @@ void int_to_ascii(int n, char str[]) {
 
 void sleep(int milliseconds)
 {
+    int current = tick;
+    while(tick-current < milliseconds){}
     return;
-    tick = 0;
-    while(tick < milliseconds){}
-    return;
+}
+
+int random(){
+    return tick; // just return the time stamp as random value
 }
 
 

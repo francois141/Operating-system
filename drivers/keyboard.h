@@ -22,8 +22,14 @@
 
 #include "../drivers/screen.h"
 #include "../kernel/shell.h"
+#include "../cpu/types.h"
 
 unsigned char key_pressed[256];
+
+u8 KEYAPRESSED;
+u8 KEYSPRESSED;
+u8 KEYDPRESSED;
+u8 KEYWPRESSED;
 
 void init_keyboard();
 

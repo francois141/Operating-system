@@ -29,21 +29,25 @@ static void parse_command()
         {
             print("end : stopper le syteme\n");
             print("lspci : analyser PCI\n");
-            print("read disk : lire le contenu du disque\n");
             print("clear : nettoyer l'ecran\n");
             print("version : donne la version de l'os\n");
-
+            print("random : Genere un nombre aleatoire entre 0 et 49\n");
+            print("play snake : Play snake\n");
+        }
+        else if(COMMAND("random"))
+        {
+            print_byte(random());
+            print("\n");
+        }
+        else if(COMMAND("play snake"))
+        {
+            start_snake();
         }
         else if(COMMAND("lspci"))
         {
             device_scan();
             print("\n");
         }     
-        else if(COMMAND("read disk"))
-        {
-            read_sectors_ATA_PIO(0,40,1);
-            print("\n");
-        }
         else if(COMMAND("clear"))
         {
             clear_screen();

@@ -1,14 +1,18 @@
 #include "libgui.h"
 
 
-
 void initialiseLib()
 {
     screen_parameters.height = getHeight();
     screen_parameters.width  = getWidth();
 }
 
-void drawLine(u8 y1,u8 x1, u8 y2, u8 x2)
+void clear()
+{
+    clear_screen();
+}
+
+void drawLine(u16 y1,u16 x1, u16 y2, u16 x2)
 {
   int dx=x2-x1; 
   int dxabs=ABS(dx); 
@@ -43,7 +47,7 @@ void drawLine(u8 y1,u8 x1, u8 y2, u8 x2)
 
 }
 
-void drawRectangle(u8 y1,u8 x1,u8 y2,u8 x2,u8 width)
+void drawRectangle(u16 y1,u16 x1,u16 y2,u16 x2,u16 width)
 {
     drawLine(y1,x1,y1,x2);
     drawLine(y2,x1,y2,x2);
@@ -51,7 +55,7 @@ void drawRectangle(u8 y1,u8 x1,u8 y2,u8 x2,u8 width)
     drawLine(y1,x2,y2,x2);
 }
 
-void drawCircle(u8 y, u8 x, float radius, u8 width)
+void drawCircle(u16 y, u16 x, float radius, u16 width)
 {
 #define SAMPLES 250
     for(int i = 0; i < SAMPLES;i++)
@@ -59,22 +63,22 @@ void drawCircle(u8 y, u8 x, float radius, u8 width)
         float x1 = cos(i/(float)SAMPLES * 2 * pi);
         float y1 = sin(i/(float)SAMPLES * 2 * pi);
 
-        put_pixel(y + (u8)radius*y1,x + (u16)radius*x1,12);
+        put_pixel(y + (u16)radius*y1,x + (u16)radius*x1,12);
     }
 }
 
-void drawFilledRectangle(u8 y1,u8 x1,u8 y2,u8 x2)
+void drawFilledRectangle(u16 y1,u16 x1,u16 y2,u16 x2)
 {
     for(int i = x1; i <= x2;i++)
     {
         for(int j = y1; j < y2;j++)
         {
             if(0 <= i && i < ROW_SIZE && 0 <= j && j <= COLUMN_SIZE)
-                put_pixel(j,i,13);
+                put_pixel(j,i,12);
         }
     }
 }
-void drawFilledCircle(u8 y,u8 x,float radius)
+void drawFilledCircle(u16 y,u16 x,float radius)
 {
     #define SAMPLES 250
     for(int j = 0; j < radius;j++)
@@ -90,7 +94,7 @@ void drawFilledCircle(u8 y,u8 x,float radius)
 
 }
 
-void drawText(u8 startX, u8 startY, char *message)
+void drawText(u16 startX, u16 startY, char *message)
 {   
     int i = 0;
     while(message[i] != 0)

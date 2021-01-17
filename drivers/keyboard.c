@@ -133,7 +133,23 @@ static void keyboard_callback(registers_t r)
     }
     else
     { 
-        add_key(key_shift == 0 ? scan_codes_CH[scancode] : scan_codes_shift_CH[scancode]);
+      if(scan_codes_CH[scancode] == 'a')
+      {
+        KEYAPRESSED = 1;
+      }
+      if(scan_codes_CH[scancode] == 's')
+      {
+        KEYSPRESSED = 1;
+      }
+      if(scan_codes_CH[scancode] == 'd')
+      {
+        KEYDPRESSED = 1;
+      }
+      if(scan_codes_CH[scancode] == 'w')
+      {
+        KEYWPRESSED = 1;
+      }
+      add_key(key_shift == 0 ? scan_codes_CH[scancode] : scan_codes_shift_CH[scancode]);
     }
  
 }
@@ -141,4 +157,10 @@ static void keyboard_callback(registers_t r)
 void init_keyboard()
 {
     register_interrupt_handler(IRQ1, keyboard_callback);
+
+    u8 KEYAPRESSED = 0;
+    u8 KEYSPRESSED = 0;
+    u8 KEYDPRESSED = 0;
+    u8 KEYWPRESSED = 0;
+
 }

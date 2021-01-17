@@ -17,6 +17,7 @@ void main()
   isr_install();
   init_keyboard();
   __asm__ __volatile__("sti");
+  init_timer(1000);
 
   load_screen_driver();
   enter_shell();

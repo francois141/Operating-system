@@ -5,23 +5,29 @@
 #include "../../drivers/screen.h"
 #include "../math.h"
 
+#define ROW_SIZE 320
+#define COLUMN_SIZE 200
+
+
 typedef struct{
-    int width;
-    int height;
-} Screen_parameters; 
+    u16 width;
+    u16 height;
+} Screen_parameters;
 
 Screen_parameters screen_parameters;
 
 void initialiseLib();
 
-void drawLine(u8 y1,u8 x1,u8 y2,u8 x2);
+void drawLine(u16 y1,u16 x1,u16 y2,u16 x2);
 
-void drawRectangle(u8 y1,u8 x1,u8 y2,u8 x2,u8 width);
-void drawCircle(u8 y, u8 x, float radius, u8 width );
+void drawRectangle(u16 y1,u16 x1,u16 y2,u16 x2,u16 width);
+void drawCircle(u16 y, u16 x, float radius, u16 width );
 
-void drawFilledRectangle(u8 y,u8 x1,u8 y2,u8 x2);
-void drawFilledCircle(u8 y,u8 x,float radius);
+void drawFilledRectangle(u16 y,u16 x1,u16 y2,u16 x2);
+void drawFilledCircle(u16 y,u16 x,float radius);
 
-void drawText(u8 startX, u8 startY,char *message);
+void drawText(u16 startX, u16 startY,char *message);
+
+void clear();
 
 #endif

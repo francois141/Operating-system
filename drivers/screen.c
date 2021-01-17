@@ -993,12 +993,12 @@ void putch(char letter)
     print(message);
 }   
 
-u8 getHeight(){
-    return (u8)COLUMN_SIZE;
+u16 getHeight(){
+    return (u16)COLUMN_SIZE;
 }
 
-u8 getWidth(){
-    return (u8)ROW_SIZE;
+u16 getWidth(){
+    return (u16)ROW_SIZE;
 }
 
 static void print_hex(u8 _byte)

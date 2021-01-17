@@ -8,6 +8,10 @@ u32 tick = 0;
 static void timer_callback(registers_t regs)
 {
     tick++;
+    if(tick % 100 == 0){
+        //print("Second");
+    }
+
 }
 
 void init_timer(u32 frequency)

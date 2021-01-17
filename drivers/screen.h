@@ -47,8 +47,8 @@ void print_word(u16);
 void print_long(u32);
 void print_number(u32);
 
-u8 getHeight();
-u8 getWidth();
+u16 getHeight();
+u16 getWidth();
 
 void put_pixel(int,int,int);
 

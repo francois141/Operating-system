@@ -9,5 +9,6 @@ void memcpy(char*,char*,unsigned int);
 void memset(char*,char,unsigned int);
 void int_to_ascii(int,char[]);
 void sleep(int);
+int random();
 
 #endif
