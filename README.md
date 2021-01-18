@@ -11,7 +11,6 @@ I am currently coding a second operating system.
 * Protected mode
 * Screen driver 
 * Keyboard driver
-* Ata driver
 * Pci driver
 * Shell
 * Timer & sleep_function
@@ -29,6 +28,7 @@ I am currently coding a second operating system.
 * ELF Loading
 * SVGA
 * GUI & 3d Engine
+* Disk driver
 
 
 

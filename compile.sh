@@ -11,7 +11,6 @@ gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/isr.c -o ist.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/timer.c -o timer.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/keyboard.c -o keyboard.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/ata.c -o ata.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/pci.c -o pci.o
 
 gcc -ffreestanding  -Werror -m32 -fno-pie -c kernel/shell.c -o shell.o
@@ -26,7 +25,7 @@ gcc -ffreestanding  -Werror -m32 -fno-pie -c games/snake.c -o snake.o
 nasm cpu/interrupt.asm -f elf -o interrupt.o
 
 ld -m elf_i386 -s -o kernel.bin -Ttext 0x1000  kernel_entry.o low_level.o \
-  system.o screen.o interrupt.o  idt.o ist.o ata.o pci.o math.o snake.o pc_speaker.o timer.o keyboard.o libgui.o shell.o string.o kernel.o --oformat binary -e 0x1000
+  system.o screen.o interrupt.o  idt.o ist.o pci.o math.o snake.o pc_speaker.o timer.o keyboard.o libgui.o shell.o string.o kernel.o --oformat binary -e 0x1000
 
 cat boot_sect.bin kernel.bin > os-image.bin
 

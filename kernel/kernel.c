@@ -3,13 +3,10 @@
 #include "../drivers/timer.h"
 #include "../drivers/screen.h"
 #include "../drivers/keyboard.h"
-#include "../drivers/ata.h"
 #include "../drivers/pci.h"
 #include "shell.h"
 #include "../system_lib/graphics/libgui.h"
 #include "../drivers/pc_speaker.h"
-
-
 
 void main()
 {
@@ -20,6 +17,8 @@ void main()
   init_timer(1000);
 
   load_screen_driver();
+
   enter_shell();
+
 }
 

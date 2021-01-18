@@ -116,6 +116,7 @@ static int check_collision()
     return 0;
 }
 
+
 static void step()
 {
     for(int i = snake.size-1; i >= 0; i--)
