@@ -33,6 +33,7 @@ static void parse_command()
             print("version : donne la version de l'os\n");
             print("random : Genere un nombre aleatoire entre 0 et 49\n");
             print("play snake : Play snake\n");
+            print("read : read first lba address\n");
         }
         else if(COMMAND("random"))
         {
@@ -56,6 +57,10 @@ static void parse_command()
         else if(COMMAND("version"))
         {
             print("Version 1.0.0 \n");
+        }
+        else if(COMMAND("read"))
+        {
+            read_sectors_ATA_PIO(0,0,1);
         }
         else
         {

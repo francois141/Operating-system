@@ -21,7 +21,6 @@ void main()
 
   initialisePaging();
 
-  enter_shell();
-
+  enter_shell();  
 }
 

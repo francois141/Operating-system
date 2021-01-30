@@ -17,3 +17,11 @@ This is my first operating system written from scratch. It is certainly not very
 * Beep driver
 * Snake
 * Identity paging
+* Basic ata driver
+
+### Next step
+
+* Add dynamic memory allocation
+* Add a virtual file system
+* Improve the bootloader & create a boot data structure to retrieve the informations
+
