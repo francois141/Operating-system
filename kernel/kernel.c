@@ -7,6 +7,7 @@
 #include "shell.h"
 #include "../system_lib/graphics/libgui.h"
 #include "../drivers/pc_speaker.h"
+#include "../cpu/paging.h"
 
 void main()
 {
@@ -17,6 +18,8 @@ void main()
   init_timer(1000);
 
   load_screen_driver();
+
+  initialisePaging();
 
   enter_shell();
 

@@ -16,3 +16,4 @@ This is my first operating system written from scratch. It is certainly not very
 * Basic graphics library
 * Beep driver
 * Snake
+* Identity paging
