@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-static u32 base_address = 0x10000;
+static u32 base_address = 0x100000;
 
 // Currently this is not a very powerful version but I will implement a better one in the future
 
