@@ -18,10 +18,12 @@ This is my first operating system written from scratch. It is certainly not very
 * Snake
 * Identity paging
 * Basic ata driver
+* Basic malloc function
 
 ### Next step
 
-* Add dynamic memory allocation
-* Add a virtual file system
 * Improve the bootloader & create a boot data structure to retrieve the informations
+* I am running out of memory so I need to create a two stages kernel
+* Add a virtual file system
+
 

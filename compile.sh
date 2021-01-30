@@ -23,6 +23,7 @@ gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/pc_speaker.c -o pc_speaker.
 gcc -ffreestanding  -Werror -m32 -fno-pie -c games/snake.c -o snake.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/paging.c -o paging.o
 gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/ata.c -o ata.o
+gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/malloc.c -o malloc.o
 
 nasm cpu/interrupt.asm -f elf -o interrupt.o
 
