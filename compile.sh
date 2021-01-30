@@ -2,30 +2,30 @@ nasm boot/bootloader.asm -f bin -o boot_sect.bin
 nasm boot/kernel_entry.asm -f elf -o kernel_entry.o
 
 gcc -ffreestanding  -m32 -fno-pie -c kernel/kernel.c -o kernel.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/low_level.c -o low_level.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/screen.c -o screen.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/system.c -o system.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/low_level.c -o low_level.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/screen.c -o screen.o
+gcc -ffreestanding  -m32 -fno-pie -c system_lib/system.c -o system.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/idt.c -o idt.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/isr.c -o ist.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/timer.c -o timer.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/keyboard.c -o keyboard.o
+gcc -ffreestanding  -m32 -fno-pie -c cpu/idt.c -o idt.o
+gcc -ffreestanding  -m32 -fno-pie -c cpu/isr.c -o ist.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/timer.c -o timer.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/keyboard.c -o keyboard.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/pci.c -o pci.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/pci.c -o pci.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c kernel/shell.c -o shell.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/string.c -o string.o
+gcc -ffreestanding  -m32 -fno-pie -c kernel/shell.c -o shell.o
+gcc -ffreestanding  -m32 -fno-pie -c system_lib/string.c -o string.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/graphics/libgui.c -o libgui.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/math.c -o math.o
+gcc -ffreestanding  -m32 -fno-pie -c system_lib/graphics/libgui.c -o libgui.o
+gcc -ffreestanding  -m32 -fno-pie -c system_lib/math.c -o math.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/pc_speaker.c -o pc_speaker.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c games/snake.c -o snake.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c cpu/paging.c -o paging.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c drivers/ata.c -o ata.o
-gcc -ffreestanding  -Werror -m32 -fno-pie -c system_lib/malloc.c -o malloc.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/pc_speaker.c -o pc_speaker.o
+gcc -ffreestanding  -m32 -fno-pie -c games/snake.c -o snake.o
+gcc -ffreestanding  -m32 -fno-pie -c cpu/paging.c -o paging.o
+gcc -ffreestanding  -m32 -fno-pie -c drivers/ata.c -o ata.o
+gcc -ffreestanding  -m32 -fno-pie -c system_lib/malloc.c -o malloc.o
 
-gcc -ffreestanding  -Werror -m32 -fno-pie -c vfs/vfs.c -o vfs.o
+gcc -ffreestanding  -m32 -fno-pie -c vfs/vfs.c -o vfs.o
 
 nasm cpu/interrupt.asm -f elf -o interrupt.o
 

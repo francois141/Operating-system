@@ -33,6 +33,7 @@ static void parse_command()
             print("malloc : allocate 10 bytes\n");
             print("read : allocate 4096 bytes aligned\n");
             print("ls : read the content of the filesystem \n");
+            print("open : open the selected file\n");
         }
         else if(COMMAND("random"))
         {
@@ -59,7 +60,7 @@ static void parse_command()
         }
         else if(COMMAND("read"))
         {
-            read_sectors_ATA_PIO(0,100,1);
+            read_sectors_ATA_PIO(0,102,1);
         }
         else if(COMMAND("malloc aligned"))
         {
@@ -74,6 +75,11 @@ static void parse_command()
         else if(COMMAND("ls"))
         {
             parse_vfs();
+            print("\n");
+        }
+        else if(COMMAND("open"))
+        {
+            read_file(1);
             print("\n");
         }
         else

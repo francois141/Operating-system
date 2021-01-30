@@ -21,20 +21,22 @@ int main()
         write0;
     }
 
-    vector<string> files_names = {"file1.txt","hello.cpp"};
-    vector<string> files_data = {"this is the data of the first file","#include <iostream>\n unsing namespace std;\nint main()\n{\nreturn 0;\n}\n"};
+    vector<string> files_names = {"file1.txt","file2.txt"};
+    vector<string> files_data = {"this is the data of the first file","#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n\treturn 0;\n}\n"};
 
-    for(int i = 0; i < files_names.size();i++)
+    for(int i = 0; i < 2;i++)
     {
         string name = files_names.at(i);
         string data = files_data.at(i);
         outfile.write((char*)(name.c_str()),name.size());
+        cout << name << endl;
+        cout << data << endl; 
         for(int i = name.size(); i < 12;i++)
         {
             write0;
         }
         outfile.write((char*)(data.c_str()),data.size());
-        for(int i = data.size(); i < 512;i++)
+        for(int i = data.size(); i < 500;i++)
         {
             write0;
         }

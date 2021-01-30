@@ -24,4 +24,9 @@ This is my first operating system written from scratch. It is certainly not very
 ### Next step
 
 * Improve the bootloader & create a boot data structure to retrieve the informations
+* Improve the malloc function
+* Improve the vfs
 
+### How to build it
+
+You should have qemu, nasm, gcc & g++ installed on your computer. I tried my OS only on ubuntu. If you are on ubuntu and all dependencies are installed then write ./compile.sh on the terminal and it will run.

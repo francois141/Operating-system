@@ -12,6 +12,7 @@ typedef struct File{
 
 void parse_vfs();
 static File* getFile(u8);
+void read_file(int);
 
 
 
