@@ -19,6 +19,7 @@ static void ATA_wait_BSY();
 static void ATA_wait_DRQ();
 
 void read_sectors_ATA_PIO(uint32_t target_address, uint32_t LBA, uint8_t sector_count);
+void read_sectors(uint32_t target_address, uint32_t LBA, uint8_t sector_count);
 
 
 #endif

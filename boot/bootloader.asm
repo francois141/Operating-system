@@ -14,13 +14,13 @@
     call set_cursor_line
     call print_string
 
-    mov bp, 0x9000
+    mov bp, 0x850
     mov sp,bp
 
 
     ;load kernel into memory
-    mov bx, 0x1000
-    mov dh,50
+    mov bx, 0x8000
+    mov dh,56
 
     call load_from_disk
 
@@ -47,7 +47,7 @@ START_PM:
     mov ebp, 0x90000
     mov esp,ebp
     call print_string_pm
-    call 0x1000
+    call 0x8000
     jmp $
 
 [bits 16]

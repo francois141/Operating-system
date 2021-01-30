@@ -103,7 +103,7 @@ static int check_collision()
     if(snake.dataX[0] == food.x && snake.dataY[0] == food.y)
     {
         snake.size++;
-        if(snake.size == 6)
+        if(snake.size == 20)
         {
             drawText(100,100,"WIN WIN WIN !!!");
             beep(700);

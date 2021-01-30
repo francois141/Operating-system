@@ -8,12 +8,8 @@ void enter_shell()
     while(1)
     {
         while(NOT_KEY_EXECUTE){} // wait until we can process the data 
-
         key_buffer[--index] = 0;
-
         parse_command();
-
-
         clear_buffer();
         print(">>");
     }    
@@ -33,7 +29,10 @@ static void parse_command()
             print("version : donne la version de l'os\n");
             print("random : Genere un nombre aleatoire entre 0 et 49\n");
             print("play snake : Play snake\n");
-            print("read : read first lba address\n");
+            print("read : read first lba address\n");           
+            print("malloc : allocate 10 bytes\n");
+            print("read : allocate 4096 bytes aligned\n");
+            print("ls : read the content of the filesystem \n");
         }
         else if(COMMAND("random"))
         {
@@ -60,7 +59,22 @@ static void parse_command()
         }
         else if(COMMAND("read"))
         {
-            read_sectors_ATA_PIO(0,0,1);
+            read_sectors_ATA_PIO(0,100,1);
+        }
+        else if(COMMAND("malloc aligned"))
+        {
+            print_long(malloc_aligned(4096));
+            print("\n");
+        }
+        else if(COMMAND("malloc"))
+        {
+            print_long(malloc(10));
+            print("\n");
+        }
+        else if(COMMAND("ls"))
+        {
+            parse_vfs();
+            print("\n");
         }
         else
         {

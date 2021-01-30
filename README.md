@@ -19,11 +19,9 @@ This is my first operating system written from scratch. It is certainly not very
 * Identity paging
 * Basic ata driver
 * Basic malloc function
+* Basic virtual file system
 
 ### Next step
 
 * Improve the bootloader & create a boot data structure to retrieve the informations
-* I am running out of memory so I need to create a two stages kernel
-* Add a virtual file system
-
 

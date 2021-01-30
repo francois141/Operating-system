@@ -8,6 +8,8 @@
 #include "../drivers/keyboard.h"
 #include "../games/snake.h"
 #include "../drivers/ata.h"
+#include "../system_lib/malloc.h"
+#include "../vfs/vfs.h"
 
 #define KEY_EXECUTE key_buffer[index-1] == 0x0a
 #define NOT_KEY_EXECUTE key_buffer[index-1] != 0x0a

@@ -8,6 +8,7 @@
 #include "../system_lib/graphics/libgui.h"
 #include "../drivers/pc_speaker.h"
 #include "../cpu/paging.h"
+#include "../system_lib/malloc.h"
 
 void main()
 {
