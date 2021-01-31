@@ -21,11 +21,13 @@ This is my first operating system written from scratch. It is certainly not very
 * Basic malloc function
 * Basic virtual file system
 
-### Next step
+### Next steps
 
 * Improve the bootloader & create a boot data structure to retrieve the informations
 * Improve the malloc function
 * Improve the vfs
+* Use a better resolution than the current 320 * 200 resolution
+* Enable multitasking but still in kernel mode 
 
 ### How to build it
 
