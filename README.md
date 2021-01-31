@@ -21,6 +21,8 @@ This is my first operating system written from scratch. It is certainly not very
 * Basic malloc function
 * Basic virtual file system
 * Global descriptor table 
+* Retrieve VESA Information
+* Retrieve the physical memory map
 
 ### Next steps
 
