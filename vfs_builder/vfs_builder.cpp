@@ -29,8 +29,6 @@ int main()
         string name = files_names.at(i);
         string data = files_data.at(i);
         outfile.write((char*)(name.c_str()),name.size());
-        cout << name << endl;
-        cout << data << endl; 
         for(int i = name.size(); i < 12;i++)
         {
             write0;

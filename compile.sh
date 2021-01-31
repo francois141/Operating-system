@@ -26,11 +26,13 @@ gcc -ffreestanding  -m32 -fno-pie -c drivers/ata.c -o ata.o
 gcc -ffreestanding  -m32 -fno-pie -c system_lib/malloc.c -o malloc.o
 
 gcc -ffreestanding  -m32 -fno-pie -c vfs/vfs.c -o vfs.o
+gcc -ffreestanding  -m32 -fno-pie -c cpu/gdt.c -o gdt.o
 
 nasm cpu/interrupt.asm -f elf -o interrupt.o
+nasm cpu/gdt.asm       -f elf -o gdt_asm.o
 
 ld -m elf_i386 -s -o kernel.bin -Ttext 0x8000  kernel_entry.o low_level.o \
-  system.o screen.o interrupt.o  idt.o ist.o pci.o ata.o math.o snake.o pc_speaker.o malloc.o vfs.o paging.o timer.o keyboard.o libgui.o shell.o string.o kernel.o --oformat binary -e 0x8000
+  system.o screen.o interrupt.o  gdt.o gdt_asm.o idt.o ist.o pci.o ata.o math.o snake.o pc_speaker.o malloc.o vfs.o paging.o timer.o keyboard.o libgui.o shell.o string.o kernel.o --oformat binary -e 0x8000
 
 cat boot_sect.bin kernel.bin > os-image.bin
 

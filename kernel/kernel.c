@@ -9,6 +9,7 @@
 #include "../drivers/pc_speaker.h"
 #include "../cpu/paging.h"
 #include "../system_lib/malloc.h"
+#include "../cpu/gdt.h"
 
 void main()
 {
@@ -20,6 +21,7 @@ void main()
 
   load_screen_driver();
 
+  init_flat_gdt();
   initialisePaging();
 
   enter_shell();  

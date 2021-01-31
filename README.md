@@ -15,11 +15,12 @@ This is my first operating system written from scratch. It is certainly not very
 * Basic math library
 * Basic graphics library
 * Beep driver
-* Snake
+* Snake ( When I am tired studying !! )
 * Identity paging
 * Basic ata driver
 * Basic malloc function
 * Basic virtual file system
+* Global descriptor table 
 
 ### Next steps
 

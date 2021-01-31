@@ -1,7 +1,7 @@
 load_from_disk:
     pusha
     push dx
-
+    mov dl,0x80
     mov ah,0x02 ; Bios lecture cd
 
     mov al,dh  ; Lire dh secteurs
