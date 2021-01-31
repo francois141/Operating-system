@@ -1,7 +1,10 @@
 #include "paging.h"
 
+static page_directory *directory;
+
 void page_fault(registers_t regs)
 {
+    print("PAGE FAULT");
     while(1){};
 }
 
@@ -18,16 +21,40 @@ void switch_page_directory(void* dir)
 
 void initialisePaging()
 {
-    int i;
-    for(i = 0; i < 1024; i++)
-    {
-        page_directory[i] = 0x00000002;
-    }
-    for(i = 0; i < 1024; i++)
-    {
+    directory = malloc_aligned(sizeof(page_directory));
 
-        first_page_table[i] = (i * 0x1000) | 3; 
+    identity_map_kernel(); // a big identity map for the moment
+
+    register_interrupt_handler(14,page_fault);
+    switch_page_directory(directory);
+}
+
+void identity_map_kernel()
+{
+    for(int i = 0; i < 100000; i++)
+    {
+        map_frame(i*0x1000,i*0x1000);
     }
-    page_directory[0] = ((unsigned int)first_page_table) | 3;
-    switch_page_directory(page_directory);
+}
+
+void map_frame(u32 va, u32 pa)
+{
+    // nothing for the moment
+    u32 base    = (va >> 12) / 1024;
+    u32 offset  = (va >> 12) % 1024;
+
+    if(directory->entries[base].present == 0)
+    {
+        // we need to get some free space
+        u32 alligned_address = malloc_aligned(sizeof(page_table));
+        directory->entries[base].present = 1;
+        directory->entries[base].rw      = 1;
+        directory->entries[base].aligned_address = alligned_address >> 12;
+    }
+
+    page_table* page_table_location = directory->entries[base].aligned_address << 12;
+
+    page_table_location->entries[offset].present = 1;
+    page_table_location->entries[offset].rw      = 1;
+    page_table_location->entries[offset].aligned_address = pa >> 12;
 }

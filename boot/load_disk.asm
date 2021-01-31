@@ -16,11 +16,6 @@ load_from_disk:
     cmp al,dh
     jne disk_error
 
-    mov dh,2
-    mov bx,load_disk_sucess
-    call set_cursor_line
-    call print_string
-
     popa
     ret
 disk_error:
