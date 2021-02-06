@@ -42,6 +42,6 @@ cd ..
 
 dd if=vfs_builder/filesystem of=os-image.bin bs=512 seek=100 count=100
 
-qemu-system-x86_64 -hda os-image.bin -soundhw pcspk -boot c
+qemu-system-x86_64 -hda os-image.bin -soundhw pcspk -boot c -m 4G
 
 make clean

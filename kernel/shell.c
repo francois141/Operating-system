@@ -39,9 +39,15 @@ static void parse_command()
         }
         else if(COMMAND("memory")) // this function is hugly it's normal I am testing it
         {
-            for(int i = 0; i < 512;i++)
+            for(int i = 0; i < 24*3;i++)
             {
-                char *pointer = 0x8000+i;
+                if(i % 4 == 0)
+                    print("\n");
+
+                if(i % 24 == 0)
+                    print("\n");
+
+                char *pointer = 0x3000+i;
                 print_byte(*pointer);
             }print("\n");
         }

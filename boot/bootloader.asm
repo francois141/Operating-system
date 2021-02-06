@@ -34,7 +34,33 @@
     int 0x13
     jc end
 
-    ; switch to 32 bits protected mode
+    ; get the physical memory map
+    xor ebx,ebx
+    xor bp,bp
+    mov edx, 'PAMS'
+    mov eax, 0xe820
+    mov ecx, 24
+    mov di, 0x3000
+    int 0x15
+    jc errore
+    cmp eax,'PAMS'
+    je continue
+    
+errore:
+    jmp $
+nexte:
+    inc bp
+    add di,24
+continue:
+    mov edx,'PAMS'
+    mov ecx, 24
+    mov eax,0xe820
+    int 0x15
+    cmp ebx,0
+    jne nexte
+    ; end of get the system memory
+
+    ; switch to 32 bits protected mode (we are done with the bootloader stuff)
     call switch_to_pm
 end:
     jmp end ;end
