@@ -40,8 +40,8 @@ cd vfs_builder
 ./build.sh
 cd ..
 
-dd if=vfs_builder/filesystem of=os-image.bin bs=512 seek=100 count=10
+dd if=vfs_builder/filesystem of=os-image.bin bs=512 seek=100 count=100
 
-qemu-system-x86_64 -drive file=os-image.bin,format=raw -soundhw pcspk
+qemu-system-x86_64 -hda os-image.bin -soundhw pcspk -boot c
 
 make clean

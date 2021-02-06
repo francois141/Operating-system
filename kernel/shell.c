@@ -23,7 +23,7 @@ static void parse_command()
         }
         else if(COMMAND("help"))
         {
-            /*print("end : stopper le syteme\n");
+            print("end : stopper le syteme\n");
             print("lspci : analyser PCI\n");
             print("clear : nettoyer l'ecran\n");
             print("version : donne la version de l'os\n");
@@ -35,33 +35,15 @@ static void parse_command()
             print("ls : read the content of the filesystem \n");
             print("open : open the selected file\n");
             print("vesa : parse all vesa modes\n");
-            print("memory : return the physical memory \n");*/
+            print("memory : return the physical memory \n");
         }
         else if(COMMAND("memory")) // this function is hugly it's normal I am testing it
         {
-            /*print("parse the ram\n");
-            u16 *pointer = 0x2000;
-            for(int i = 0; i < 6;i++)
+            for(int i = 0; i < 512;i++)
             {
-                print_word(*pointer);
-                print("\n");
-                pointer++;
-                print_word(*pointer);
-                print("\n");
-                pointer++;
-                print_long(*pointer);
-                print("\n");
-                pointer+=2;
-                pointer += 8;
-            }
-            print("\n");*/
-
-            for(int i = 0; i < 0x24 * 6;i++)
-            {
-                u8 *pointer = 0x2000 + i; 
+                char *pointer = 0x8000+i;
                 print_byte(*pointer);
-            }
-            print("\n");
+            }print("\n");
         }
         else if(COMMAND("vesa")) // This function is hugly it's normal I am testing it
         {             
@@ -103,7 +85,7 @@ static void parse_command()
         }
         else if(COMMAND("read"))
         {
-            read_sectors_ATA_PIO(0,102,1);
+            read_sectors_ATA_PIO(0,0,1);
         }
         else if(COMMAND("malloc aligned"))
         {
