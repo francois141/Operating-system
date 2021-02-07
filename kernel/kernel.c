@@ -22,9 +22,7 @@ void main()
   load_screen_driver();
 
   init_flat_gdt();
-  //initialisePaging();
+  initialisePaging();
 
   enter_shell();  
-
 }
-

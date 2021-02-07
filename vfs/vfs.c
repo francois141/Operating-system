@@ -2,8 +2,8 @@
 
 #define MAGIC_WORD 0xbeeffeeb
 
-const unsigned int *base_address = (u32*)0x100000;
-const unsigned int *number_files = (u32*)0x100004;
+const unsigned int *base_address = (u32*)0x200000;
+const unsigned int *number_files = (u32*)0x200004;
 const unsigned int base_lba = 100;
 
 static int getFileInt(u8 number)

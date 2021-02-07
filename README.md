@@ -21,6 +21,8 @@ This is my first operating system written from scratch. It is certainly not very
 * Basic malloc function
 * Basic virtual file system
 * Global descriptor table 
+* Retrieve VESA Information
+* Retrieve the physical memory map
 
 ### Next steps
 
@@ -29,6 +31,14 @@ This is my first operating system written from scratch. It is certainly not very
 * Improve the vfs
 * Use a better resolution than the current 320 * 200 resolution
 * Enable multitasking but still in kernel mode 
+* Improve the drivers
+
+### In the future
+
+* Network
+* USB
+* Multicore
+* GUI
 
 ### How to build it
 
