@@ -23,6 +23,5 @@ void main()
 
   init_flat_gdt();
   initialisePaging();
-
   enter_shell();  
 }
