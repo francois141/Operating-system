@@ -23,13 +23,12 @@ This is my first operating system written from scratch. It is certainly not very
 * Global descriptor table 
 * Retrieve VESA Information
 * Retrieve the physical memory map
+* Setting 1280 * 1024 resolution mode
+* Retrieve physical memory map
 
 ### Next steps
 
-* Improve the bootloader & create a boot data structure to retrieve the informations
-* Improve the malloc function
-* Improve the vfs
-* Use a better resolution than the current 320 * 200 resolution
+* Write a space invaders for fun
 * Enable multitasking but still in kernel mode 
 * Improve the drivers
 

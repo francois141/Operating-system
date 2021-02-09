@@ -19,6 +19,15 @@
     mov ax, 0x4f00
     mov di, 0x1000
     int 0x10
+    ; get VBE mode information
+    mov ax,0x4f01
+    mov cx,0x4118
+    mov di,0x2000
+    int 0x10
+    ; set VBE mode
+    mov ax,0x4f02
+    mov bx,0x411B
+    int 0x10
 
     ; check if extension present
     mov ah, 0x41
