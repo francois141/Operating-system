@@ -1,9 +1,13 @@
 #ifndef EARLY_MEMORY_H
 #define EARLY_MEMORY_H
 
+#include "../cpu/types.h"
+
 typedef unsigned short uint16;
 typedef unsigned char  uint8;
 typedef unsigned int   uint32;
+
+
 
 typedef struct vbe_info_signature{
 	char signature[4];	
@@ -57,5 +61,10 @@ typedef struct vbe_mode_info_structure {
 	uint16 off_screen_mem_size;	// size of memory in the framebuffer but not being displayed on the screen
 	uint8 reserved1[206];
 } __attribute__ ((packed)) vbe_mode_info_structure;
+
+typedef struct e820_info_block{
+
+
+}__attribute__((packed)) e820_info_block;
 
 #endif
