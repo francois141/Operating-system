@@ -28,7 +28,6 @@ This is my first operating system written from scratch. It is certainly not very
 
 ### Next steps
 
-* Write a space invaders for fun
 * Enable multitasking but still in kernel mode 
 * Improve the drivers
 

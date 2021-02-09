@@ -1,5 +1,5 @@
 #include "screen.h"
-
+#include "../system_lib/graphics/color.h"
 
 
 #define TABLE_OFFSET 32
@@ -870,12 +870,14 @@ int ascii_to_array(char number)
     return number - TABLE_OFFSET;
 }
 
+u8* video_memory = 0x0;
 
-u8* video_memory = (u8*) 0xa0000;
 
 void put_pixel(int y, int x, int z)
 {
-  video_memory[x + 320*y] = z;
+  video_memory[3*(x + 1280*y)] = z;
+  video_memory[3*(x + 1280*y) + 1] = z>>8;
+  video_memory[3*(x + 1280*y) + 2] = z>>16;
 }
 
 int write_char(int y, int x,int index)
@@ -885,7 +887,13 @@ int write_char(int y, int x,int index)
     for(int j = 0; j < 6;j++)
     {
       if(!(characters[index][i][j] == 0))
-        put_pixel(y+i,x+j,13);
+      {
+        put_pixel(y+2*i+1,x+2*j,COLOR_OLIVE);
+        put_pixel(y+2*i+1,x+2*j+1,COLOR_OLIVE);
+        put_pixel(y+2*i,x+2*j,COLOR_OLIVE);
+        put_pixel(y+2*i,x+2*j+1,COLOR_OLIVE);
+      }
+
     }
   }
 }
@@ -893,11 +901,11 @@ int write_char(int y, int x,int index)
 
 void clear_char(int y,int x)
 {
-    for(int i = 0; i < 6;i++)
+    for(int i = 0; i < 14;i++)
     {
-        for(int j = 0; j < 6;j++)
+        for(int j = 0; j < 14;j++)
         {
-            put_pixel(7*y+i,7*x+j,0);
+            put_pixel(CHAR_SIZE*y+i,CHAR_SIZE*x+j,0);
         }
     } 
 }
@@ -910,14 +918,16 @@ void remove_last_char()
 
 void load_screen_driver()
 {
+    vbe_mode_info_structure *vbe = VESA_block_address;
+    video_memory = vbe->framebuffer;
     clear_screen();
     screen_settings.cursorX = 0;
-    screen_settings.cursorY = 0; 
+    screen_settings.cursorY = 0;
 }
 
 void clear_screen()
 {
-    memset(VIDEO_ADDRESS,0,ROW_SIZE*COLUMN_SIZE);
+    memset(video_memory,0,ROW_SIZE*COLUMN_SIZE*BYTE_PER_PIXEL);
 }
 
 int get_cursor_offset()
@@ -947,13 +957,13 @@ int handle_scrolling()
     else
     {
         int offset = ROW_SIZE;
-        for(int i = 7;i < COLUMN_SIZE;i++)
+        for(int i = CHAR_SIZE;i <1024;i++)
         {
-            memcpy(VIDEO_ADDRESS + i*offset,VIDEO_ADDRESS + (i-7)*offset,320);
+            memcpy(video_memory + 3*i*offset,video_memory + 3*((i-CHAR_SIZE)*offset),3*1280);
         }
-        for(int i = 200 - 7; i < 200;i++)
+        for(int i = 1024 - 7; i < 1024;i++)
         {
-            memset(VIDEO_ADDRESS + i*offset,0,320);
+            memset(video_memory + 3*i*offset,0,3*1280);
         }
         screen_settings.cursorY--;
     }
@@ -973,7 +983,7 @@ void print(char* message)
         }
         int x = screen_settings.cursorX;
         int y = screen_settings.cursorY;
-        write_char(7*y,7*x,ascii_to_array(message[i]));
+        write_char(CHAR_SIZE*y,CHAR_SIZE*x,ascii_to_array(message[i]));
         i++;
         set_cursor_offset(get_cursor_offset()+1);
         handle_scrolling();

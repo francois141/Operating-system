@@ -5,8 +5,8 @@
 #include "../../drivers/screen.h"
 #include "../math.h"
 
-#define ROW_SIZE 320
-#define COLUMN_SIZE 200
+#define ROW_SIZE 1280
+#define COLUMN_SIZE 1024
 
 
 typedef struct{

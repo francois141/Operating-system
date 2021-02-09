@@ -30,7 +30,7 @@ void drawLine(u16 y1,u16 x1, u16 y2, u16 x2)
     {
       int px = i+x1;
       int py = slope*i+y1;
-      put_pixel(py,px,12);
+      put_pixel(py,px,0xFF);
     }
   }
 
@@ -41,7 +41,7 @@ void drawLine(u16 y1,u16 x1, u16 y2, u16 x2)
     {
       int px = slope*i+x1;
       int py = i+y1;
-      put_pixel(py,px,15);
+      put_pixel(py,px,0xFF);
     }
   }
 
@@ -63,7 +63,7 @@ void drawCircle(u16 y, u16 x, float radius, u16 width)
         float x1 = cos(i/(float)SAMPLES * 2 * pi);
         float y1 = sin(i/(float)SAMPLES * 2 * pi);
 
-        put_pixel(y + (u16)radius*y1,x + (u16)radius*x1,12);
+        put_pixel(y + (u16)radius*y1,x + (u16)radius*x1,0xFF);
     }
 }
 
@@ -74,7 +74,7 @@ void drawFilledRectangle(u16 y1,u16 x1,u16 y2,u16 x2)
         for(int j = y1; j < y2;j++)
         {
             if(0 <= i && i < ROW_SIZE && 0 <= j && j <= COLUMN_SIZE)
-                put_pixel(j,i,12);
+                put_pixel(j,i,0xFF);
         }
     }
 }
@@ -88,7 +88,7 @@ void drawFilledCircle(u16 y,u16 x,float radius)
             float x1 = cos(i/(float)SAMPLES * 2 * pi);
             float y1 = sin(i/(float)SAMPLES * 2 * pi);
 
-            put_pixel(y + j*y1,x + j*x1,12);
+            put_pixel(y + j*y1,x + j*x1,0xFF);
         }
     }
 
@@ -99,7 +99,7 @@ void drawText(u16 startX, u16 startY, char *message)
     int i = 0;
     while(message[i] != 0)
     {
-        write_char(startY,startX + 7*i,ascii_to_array(message[i]));
+        write_char(startY,startX + 14*i,ascii_to_array(message[i]));
         i++;
     }
 }

@@ -31,7 +31,7 @@ void initialisePaging()
 
 void identity_map_kernel()
 {
-    for(int i = 0; i < 100000; i++)
+    for(int i = 0; i < 10000000; i++)
     {
         map_frame(i*0x1000,i*0x1000);
     }

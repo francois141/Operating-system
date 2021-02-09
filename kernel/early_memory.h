@@ -7,8 +7,6 @@ typedef unsigned short uint16;
 typedef unsigned char  uint8;
 typedef unsigned int   uint32;
 
-
-
 typedef struct vbe_info_signature{
 	char signature[4];	
 	uint16 version;			
@@ -62,9 +60,23 @@ typedef struct vbe_mode_info_structure {
 	uint8 reserved1[206];
 } __attribute__ ((packed)) vbe_mode_info_structure;
 
+typedef struct e820_entry{
+
+}__attribute__((packed)) e280_entry;
+
 typedef struct e820_info_block{
-
-
+	e280_entry entry[6];
 }__attribute__((packed)) e820_info_block;
+
+extern const vbe_info_signature* VESA_information_address;
+extern const vbe_mode_info_structure* VESA_block_address;
+
+extern const e820_info_block* e820_address;
+
+extern const u32* kernel_loader_address;
+extern const u32* kernel_address;
+
+extern const u32* malloc_start_address;
+extern const u32* malloc_end_address;
 
 #endif

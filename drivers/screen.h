@@ -4,16 +4,16 @@
 #include "../cpu/types.h"
 #include "../drivers/low_level.h"
 #include "../system_lib/system.h"
+#include "../kernel/early_memory.h"
 
-
-#define VIDEO_ADDRESS (char *)0xa0000
 #define MAX_ROWS 28
 #define MAX_COLS 45
 
-#define ROW_SIZE 320
-#define COLUMN_SIZE 200
+#define ROW_SIZE 1280
+#define COLUMN_SIZE 1024
+#define BYTE_PER_PIXEL 3
 
-#define CHAR_SIZE 7
+#define CHAR_SIZE 14
 
 typedef struct
 {

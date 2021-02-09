@@ -14,25 +14,21 @@
 
 void main()
 {
-  load_screen_driver();
+  //load_screen_driver();
   isr_install();
   init_keyboard();
   __asm__ __volatile__("sti");
   init_timer(1000);
 
-  load_screen_driver();
+  //load_screen_driver();
 
   init_flat_gdt();
 
-  vbe_mode_info_structure *vbe= 0x2000;
+  load_screen_driver();
 
+  initialisePaging();
 
-  for(int i = 0; i < 10000;i++)
-  {
-     u8 *a = vbe->framebuffer + 3*i;
-     *a = 0xFF;
-  }
+  enter_shell();  
 
-  //initialisePaging();
-  //enter_shell();  
+  
 }
