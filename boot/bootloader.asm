@@ -3,10 +3,6 @@
     xor ax, ax     
     mov ds, ax
     mov es, ax
-
-    ; load graphics mode
-    call set_graphics_mode
-
     ; Setup a new stack address
     mov bp, 0x600
     mov sp,bp

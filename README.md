@@ -26,17 +26,13 @@ This is my first operating system written from scratch. It is certainly not very
 * Setting 1280 * 1024 resolution mode
 * Retrieve physical memory map
 
-### Next steps
-
-* Enable multitasking but still in kernel mode 
-* Improve the drivers
-
-### In the future
+### In the future (currentrly I am not working on this project)
 
 * Network
 * USB
 * Multicore
 * GUI
+* Process
 
 ### How to build it
 
