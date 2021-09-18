@@ -32,7 +32,12 @@ This is my first operating system written from scratch. It is certainly not very
 * USB
 * Multicore
 * GUI
+* Processes
+* Small games
+* Improve all the previous features and write a clean code
 * Process
+* Small html and css + js interpreter
+* Using it for fun on a real computer
 
 ### How to build it
 
