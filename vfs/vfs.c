@@ -33,9 +33,14 @@ void parse_vfs()
     print(" files on the filesystem");
     print("\n\n");
 
-    int *file_locations[2];
-    file_locations[0] = base_address + 512/4;
-    file_locations[1] = base_address + (512+512)/4;
+    int *file_locations[*number_files];
+    
+    u8 count = 0;
+    while(count < *number_files) {
+        file_locations[count] = base_address + ((count+1)*512)/4;
+        count++;
+    }
+        
 
     for(int i = 0; i < 2;i++)
     {
