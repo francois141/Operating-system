@@ -2,7 +2,7 @@
 
 ## My Operating system written from scratch
 
-This is my first operating system written from scratch. It is certainly not very powerful and it probably has several bugs but it allowed me to learn the basics of an operating system and drivers.
+This is my first operating system written from scratch. It is certainly not very powerful and it probably has several bugs but it allowed me to learn the basics of an operating system and drivers. I wrote it during my bachelor degree. This system is not intended to be functional or perfect. 
 
 ### Current features of the operating system 
 
@@ -26,17 +26,6 @@ This is my first operating system written from scratch. It is certainly not very
 * Setting 1280 * 1024 resolution mode
 * Retrieve physical memory map
 
-### In the future (currentrly I am not working on this project)
-
-* Network
-* USB
-* Multicore
-* GUI
-* Processes
-* Small games
-* Improve all the previous features and write a clean code
-* Process
-* Using it for fun on a real computer
 
 ### How to build it
 
