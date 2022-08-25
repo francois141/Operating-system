@@ -15,7 +15,6 @@ void memset(char *address,char value, unsigned int nbBytes)
     {
         *(address + i) = value;
     }
-
 }
 
 void int_to_ascii(int n, char str[]) {

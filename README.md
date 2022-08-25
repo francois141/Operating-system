@@ -1,5 +1,8 @@
 # Operating_System
 
+
+![alt text](example.jpeg)
+
 ## My Operating system written from scratch
 
 This is my first operating system written from scratch. It is certainly not very powerful and it probably has several bugs but it allowed me to learn the basics of an operating system and drivers. I wrote it during my bachelor degree. This system is not intended to be functional or perfect. 
