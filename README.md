@@ -33,3 +33,7 @@ This is my first operating system written from scratch. It is certainly not very
 ### How to build it
 
 You should have qemu, nasm, gcc & g++ installed on your computer. I tried my OS only on ubuntu. If you are on ubuntu and all dependencies are installed then write ./compile.sh on the terminal and it will run.
+
+### Some ressouces that helped me 
+
+http://www.jamesmolloy.co.uk/tutorial_html/index.html
