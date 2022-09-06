@@ -59,5 +59,6 @@ void switch_page_directory(void* dir);
 void initialisePaging();
 void identity_map_kernel();
 void map_frame(u32 va,u32 pa);
+page_directory *clone_directory(page_directory *src);
 
 #endif

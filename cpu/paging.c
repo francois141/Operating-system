@@ -58,3 +58,23 @@ void map_frame(u32 va, u32 pa)
     page_table_location->entries[offset].rw      = 1;
     page_table_location->entries[offset].aligned_address = pa >> 12;
 }
+
+
+page_directory *clone_directory(page_directory *src) {
+
+    u32 phys;
+    page_directory *dir = (page_directory*)malloc_aligned(sizeof(page_directory));
+
+    memset(dir,0,sizeof(page_directory));
+
+    for(int i = 0; i < 1024;i++) {
+
+        if(!src->entries[i].present) {
+            continue;
+        }
+        
+        dir->entries[i] = src->entries[i];
+    }
+
+    return dir;
+}
