@@ -7,6 +7,18 @@
 
 This is my first operating system written from scratch. It is certainly not very powerful and it probably has several bugs but it allowed me to learn the basics of an operating system and drivers. I wrote it during my bachelor degree. This system is not intended to be functional or perfect. 
 
+### Memory map in the RAM
+
+| **Address** | **Memory map**                  |
+|-------------|---------------------------------|
+| 0x1000      | VESA information                |
+| 0x2000      | Block for VESA mode             |
+| 0x3000      | Available physical memory       |
+| 0x8000      | Kernel Loader                   |
+| 0x100000    | Kernel                          |
+| 0x40000000  | Malloc function of the kernel   |
+| 0x80000000  | Space reserved for the proccess |
+
 ### Current features of the operating system 
 
 * Protected mode
@@ -33,3 +45,9 @@ This is my first operating system written from scratch. It is certainly not very
 ### How to build it
 
 You should have qemu, nasm, gcc & g++ installed on your computer. I tried my OS only on ubuntu. If you are on ubuntu and all dependencies are installed then write ./compile.sh on the terminal and it will run.
+
+### Some ressouces that helped me 
+
+http://www.jamesmolloy.co.uk/tutorial_html/index.html
+
+
