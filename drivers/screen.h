@@ -6,8 +6,8 @@
 #include "../system_lib/system.h"
 #include "../kernel/early_memory.h"
 
-#define MAX_ROWS 28
-#define MAX_COLS 45
+#define MAX_ROWS 72
+#define MAX_COLS 90
 
 #define ROW_SIZE 1280
 #define COLUMN_SIZE 1024
