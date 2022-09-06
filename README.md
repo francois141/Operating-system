@@ -16,8 +16,9 @@ This is my first operating system written from scratch. It is certainly not very
 | 0x3000      | Available physical memory       |
 | 0x8000      | Kernel Loader                   |
 | 0x100000    | Kernel                          |
-| 0x40000000  | Malloc function of the kernel   |
-| 0x80000000  | Space reserved for the proccess |
+| 0x10000000  | Kernel stack pointer            |
+| 0x10000000  | Malloc function of the kernel   |
+
 
 ### Current features of the operating system 
 

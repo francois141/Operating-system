@@ -80,7 +80,7 @@ end:
 [bits 32]
 START_PM:
     mov ebx, load_kernel_msg
-    mov ebp, 0x90000
+    mov ebp, 0x10000000 ; Move the kernel stack to this point in memory
     mov esp,ebp
     call print_string_pm
     call 0x8000 ; we call the kernel loader

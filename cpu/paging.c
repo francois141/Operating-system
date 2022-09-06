@@ -8,17 +8,6 @@ void page_fault(registers_t regs)
     while(1){};
 }
 
-void switch_page_directory(void* dir)
-{
-    register_interrupt_handler(14, page_fault);
-
-    __asm__ volatile("mov %0, %%cr3"::"r"(dir));
-    u32 cr0;
-    __asm__ volatile("mov %%cr0, %0": "=r"(cr0));
-    cr0 |= 0x80000000; 
-    __asm__ volatile("mov %0, %%cr0":: "r"(cr0));
-}
-
 void initialisePaging()
 {
     directory = malloc_aligned(sizeof(page_directory));
@@ -35,6 +24,17 @@ void identity_map_kernel()
     {
         map_frame(i*0x1000,i*0x1000);
     }
+}
+
+void switch_page_directory(void* dir)
+{
+    register_interrupt_handler(14, page_fault);
+
+    __asm__ volatile("mov %0, %%cr3"::"r"(dir));
+    u32 cr0;
+    __asm__ volatile("mov %%cr0, %0": "=r"(cr0));
+    cr0 |= 0x80000000; 
+    __asm__ volatile("mov %0, %%cr0":: "r"(cr0));
 }
 
 void map_frame(u32 va, u32 pa)

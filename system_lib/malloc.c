@@ -23,3 +23,8 @@ u32 malloc(u32 size)
     base_address += size;
     return ret_address;
 }
+
+void free(u32 address) 
+{
+    return;
+}
