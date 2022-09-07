@@ -72,9 +72,33 @@ page_directory *clone_directory(page_directory *src) {
         if(!src->entries[i].present) {
             continue;
         }
+
+        page_table *src_page_table = (page_table*) FRAME_TO_ADDRESS(src->entries[i]);
+        page_table *copied = clone_table(src_page_table);
+
+        page_directory_entry entry = src->entries[i];
+        entry.aligned_address = ADDRESS_TO_FRAME(copied);
         
-        dir->entries[i] = src->entries[i];
+        dir->entries[i] = entry;
     }
 
     return dir;
+}
+
+
+page_table *clone_table(page_table *src) {
+
+    page_table *table = (page_table*)malloc_aligned(sizeof(page_table));
+
+    memset(table,0,sizeof(page_table));
+
+    for(int i = 0; i < 1024; i++) {
+        if(!table->entries[i].present) {
+            continue;
+        }
+
+        table->entries[i] = src->entries[i];
+    }
+
+    return table;
 }

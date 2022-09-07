@@ -6,6 +6,9 @@
 #include "../cpu/isr.h"
 #include "../system_lib/malloc.h"
 
+#define FRAME_TO_ADDRESS(x) (x.aligned_address * 0x1000)
+#define ADDRESS_TO_FRAME(x) ((int)x) >> 12
+
 typedef struct page_directory_entry page_directory_entry;
 typedef struct page_table_entry page_table_entry;
 typedef struct page_directory page_directory;
@@ -51,14 +54,12 @@ struct page_table
     page_table_entry entries[1024];
 };
 
-//u32 page_directory[1024] __attribute__((aligned(4096)));
-//u32 first_page_table[1024] __attribute__((aligned(4096)));
-
 void page_fault(registers_t regs);
 void switch_page_directory(void* dir);
 void initialisePaging();
 void identity_map_kernel();
 void map_frame(u32 va,u32 pa);
 page_directory *clone_directory(page_directory *src);
+page_table *clone_table(page_table *src);
 
 #endif
