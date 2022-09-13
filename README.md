@@ -42,6 +42,15 @@ This is my first operating system written from scratch. It is certainly not very
 * Setting 1280 * 1024 resolution mode
 * Retrieve physical memory map
 
+### TODO
+
+* Processes
+* User mode
+* Gui
+* System lib
+* Better disk driver
+* File system
+* Sound
 
 ### How to build it
 
