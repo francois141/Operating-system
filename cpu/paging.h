@@ -5,6 +5,7 @@
 #include "../cpu/types.h"
 #include "../cpu/isr.h"
 #include "../system_lib/malloc.h"
+#include "../drivers/screen.h"
 
 #define FRAME_TO_ADDRESS(x) (x.aligned_address * 0x1000)
 #define ADDRESS_TO_FRAME(x) ((int)x) >> 12
@@ -14,7 +15,7 @@ typedef struct page_table_entry page_table_entry;
 typedef struct page_directory page_directory;
 typedef struct page_table page_table; 
 
-static page_directory *current_directory;
+page_directory *current_directory;
 
 struct page_directory_entry
 {
