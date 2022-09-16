@@ -1,6 +1,5 @@
 #include "paging.h"
 
-static page_directory *directory;
 
 void page_fault(registers_t regs)
 {
@@ -10,12 +9,12 @@ void page_fault(registers_t regs)
 
 void initialisePaging()
 {
-    directory = malloc_aligned(sizeof(page_directory));
+    current_directory = malloc_aligned(sizeof(page_directory));
 
     identity_map_kernel(); // a big identity map for the moment
 
     register_interrupt_handler(14,page_fault);
-    switch_page_directory(directory);
+    switch_page_directory(current_directory);
 }
 
 void identity_map_kernel()
@@ -43,16 +42,16 @@ void map_frame(u32 va, u32 pa)
     u32 base    = (va >> 12) / 1024;
     u32 offset  = (va >> 12) % 1024;
 
-    if(directory->entries[base].present == 0)
+    if(current_directory->entries[base].present == 0)
     {
         // we need to get some free space
         u32 alligned_address = malloc_aligned(sizeof(page_table));
-        directory->entries[base].present = 1;
-        directory->entries[base].rw      = 1;
-        directory->entries[base].aligned_address = alligned_address >> 12;
+        current_directory->entries[base].present = 1;
+        current_directory->entries[base].rw      = 1;
+        current_directory->entries[base].aligned_address = alligned_address >> 12;
     }
 
-    page_table* page_table_location = directory->entries[base].aligned_address << 12;
+    page_table* page_table_location = current_directory->entries[base].aligned_address << 12;
 
     page_table_location->entries[offset].present = 1;
     page_table_location->entries[offset].rw      = 1;

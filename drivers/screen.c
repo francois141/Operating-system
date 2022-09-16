@@ -888,10 +888,10 @@ int write_char(int y, int x,int index)
     {
       if(!(characters[index][i][j] == 0))
       {
-        put_pixel(y+2*i+1,x+2*j,COLOR_OLIVE);
-        put_pixel(y+2*i+1,x+2*j+1,COLOR_OLIVE);
-        put_pixel(y+2*i,x+2*j,COLOR_OLIVE);
-        put_pixel(y+2*i,x+2*j+1,COLOR_OLIVE);
+        put_pixel(y+2*i+1,x+2*j,COLOR_GREEN);
+        put_pixel(y+2*i+1,x+2*j+1,COLOR_GREEN);
+        put_pixel(y+2*i,x+2*j,COLOR_GREEN);
+        put_pixel(y+2*i,x+2*j+1,COLOR_GREEN);
       }
 
     }
@@ -905,7 +905,7 @@ void clear_char(int y,int x)
     {
         for(int j = 0; j < 14;j++)
         {
-            put_pixel(CHAR_SIZE*y+i,CHAR_SIZE*x+j,0);
+            put_pixel(CHAR_SIZE*y+i,CHAR_SIZE*x+j,COLOR_BLACK);
         }
     } 
 }
@@ -927,7 +927,7 @@ void load_screen_driver()
 
 void clear_screen()
 {
-    memset(video_memory,0,ROW_SIZE*COLUMN_SIZE*BYTE_PER_PIXEL);
+    memset(video_memory,COLOR_BLACK,ROW_SIZE*COLUMN_SIZE*BYTE_PER_PIXEL);
 }
 
 int get_cursor_offset()

@@ -11,16 +11,14 @@
 #include "../system_lib/malloc.h"
 #include "../cpu/gdt.h"
 #include "early_memory.h"
+#include "../cpu/task.h"
 
 void main()
 {
-  //load_screen_driver();
   isr_install();
   init_keyboard();
   __asm__ __volatile__("sti");
   init_timer(1000);
-
-  //load_screen_driver();
 
   init_flat_gdt();
 
@@ -28,7 +26,13 @@ void main()
 
   initialisePaging();
 
-  enter_shell();  
+  initialise_tasking();
+
+
+
+  //print("Task running : if two on the screen you won!");
+
+
 
   
 }

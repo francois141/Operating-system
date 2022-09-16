@@ -1,8 +1,9 @@
 #compile the kernel
-nasm boot/bootloader.asm -f bin -o boot_sect.bin
+nasm boot/bootloader.asm   -f bin -o boot_sect.bin
 nasm boot/kernel_entry.asm -f elf -o kernel_entry.o
-nasm cpu/interrupt.asm -f elf -o interrupt.o
-nasm cpu/gdt.asm       -f elf -o gdt_asm.o
+nasm cpu/interrupt.asm     -f elf -o interrupt.o
+nasm cpu/gdt.asm           -f elf -o gdt_asm.o
+nasm cpu/helpers.asm       -f elf -o helpers.o
 
 gcc -ffreestanding  -m32 -fno-pie -c kernel/kernel.c -o kernel.o
 gcc -ffreestanding  -m32 -fno-pie -c drivers/low_level.c -o low_level.o
@@ -27,12 +28,13 @@ gcc -ffreestanding  -m32 -fno-pie -c cpu/gdt.c -o gdt.o
 gcc -ffreestanding  -m32 -fno-pie -c kernel/early_memory.c -o early_memory.o
 gcc -ffreestanding  -m32 -fno-pie -c system_lib/linkedlist.c -o linkedlist.o
 gcc -ffreestanding  -m32 -fno-pie -c system_lib/graphics/color.c -o color.o
+gcc -ffreestanding  -m32 -fno-pie -c cpu/task.c -o task.o
 
 #link the kernel
 ld -m elf_i386 -s -o kernel.bin -Ttext 0x100000  kernel_entry.o low_level.o \
   system.o screen.o interrupt.o early_memory.o gdt.o gdt_asm.o idt.o color.o \
   ist.o linkedlist.o pci.o ata.o math.o snake.o pc_speaker.o malloc.o vfs.o \
-  paging.o timer.o keyboard.o libgui.o shell.o string.o kernel.o --oformat binary -e 0x100000
+  paging.o timer.o keyboard.o libgui.o shell.o task.o string.o helpers.o kernel.o --oformat binary -e 0x100000
 
 #prepare the kernel loader
 nasm boot_second/kernelloaderentry.asm -f elf -o kernelloaderentry.o

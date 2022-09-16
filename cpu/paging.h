@@ -14,6 +14,8 @@ typedef struct page_table_entry page_table_entry;
 typedef struct page_directory page_directory;
 typedef struct page_table page_table; 
 
+static page_directory *current_directory;
+
 struct page_directory_entry
 {
     u8 present              :1;

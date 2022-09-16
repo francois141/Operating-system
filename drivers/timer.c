@@ -2,15 +2,18 @@
 #include "../cpu/isr.h"
 #include "screen.h"
 #include "low_level.h"
+#include "../cpu/task.h"
 
 u32 tick = 0;
 
 static void timer_callback(registers_t regs)
 {
     tick++;
-    if(tick % 100 == 0){
-        //print("Second");
+    if(tick % 1000 == 0){
+        print("Switch task");
+        switch_task();
     }
+
 
 }
 

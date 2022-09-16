@@ -1,0 +1,97 @@
+#include "task.h"
+#include "../system_lib/malloc.h"
+#include "paging.h"
+
+volatile task *current_task;
+extern page_directory *current_directory;
+
+void initialise_tasking()
+{
+    asm volatile("cli"); // Disable interruptions during this function
+
+    current_task = (task *)malloc(sizeof(task));
+    current_task->id = 1;
+    current_task->esp = current_task->ebp = 0;
+    current_task->eip = 0;
+    current_task->page_directory = current_directory;
+    current_task->next = 0;
+
+    asm volatile("sti"); // We can interrupt the cpu again
+}
+
+int fork()
+{
+    asm volatile("cli");
+
+    task *parent = (task *)current_task;
+    page_directory *dir = clone_directory(current_directory);
+
+    task *new_task = (task *)malloc(sizeof(task));
+
+    new_task->id = 2;
+    new_task->esp = 0;
+    new_task->ebp = 0;
+    new_task->eip = 0;
+    new_task->page_directory = dir;
+
+    u32 eip = read_eip();
+
+    // if we are the parent
+    if (current_task->id == 1)
+    {
+        u32 esp;
+        asm volatile("mov %%esp, %0"
+                     : "=r"(esp));
+        u32 ebp;
+        asm volatile("mov %%ebp, %0"
+                     : "=r"(ebp));
+        new_task->esp = esp;
+        new_task->ebp = ebp;
+        new_task->eip = eip;
+        // All finished: Reenable interrupts.
+        asm volatile("sti");
+        return current_task->id;
+    }
+    // if we are the child
+    else
+    {
+        return 0;
+    }
+}
+
+void switch_task()
+{
+    if (!current_task)
+        return;
+
+    // Read esp, ebp now for saving later on.
+    u32 esp, ebp, eip;
+    asm volatile("mov %%esp, %0"
+                 : "=r"(esp));
+    asm volatile("mov %%ebp, %0"
+                 : "=r"(ebp));
+
+    eip = read_eip();
+
+    if (eip == 0x12345)
+        return;
+
+    current_task->eip = eip;
+    current_task->esp = esp;
+    current_task->ebp = ebp;
+
+    esp = current_task->esp;
+    ebp = current_task->ebp;
+
+    asm volatile(
+        "mov %0, %%ebx\n"
+        "mov %1, %%esp\n"
+        "mov %2, %%ebp\n"
+        "mov %3, %%cr3\n"
+        "mov $0x10000, %%eax\n"
+        "jmp *%%ebx"
+        :
+        : "r"(eip), "r"(esp), "r"(ebp), "r"(current_directory)
+        : "%ebx", "%esp", "%eax");
+
+}

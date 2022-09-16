@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "pc_speaker.h": "c"
+        "pc_speaker.h": "c",
+        "types.h": "c",
+        "paging.h": "c",
+        "timer.h": "c",
+        "isr.h": "c"
     }
 }
