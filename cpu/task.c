@@ -59,6 +59,9 @@ int fork()
     }
 }
 
+
+// Right now the goal is to perform a single reading of the registers and set the read value again. 
+// This is a first trivial step in multitasking
 void switch_task()
 {
     if (!current_task)
@@ -71,7 +74,7 @@ void switch_task()
     asm volatile("mov %%ebp, %0"
                  : "=r"(ebp));
 
-    eip = read_eip();
+    eip = read_eip();   
 
     if (eip == 0x12345)
         return;
@@ -83,15 +86,11 @@ void switch_task()
     esp = current_task->esp;
     ebp = current_task->ebp;
 
-    asm volatile(
-        "mov %0, %%ebx\n"
-        "mov %1, %%esp\n"
-        "mov %2, %%ebp\n"
-        "mov %3, %%cr3\n"
-        "mov $0x10000, %%eax\n"
-        "jmp *%%ebx"
-        :
-        : "r"(eip), "r"(esp), "r"(ebp), "r"(current_directory)
-        : "%ebx", "%esp", "%eax");
-
+    
+    asm volatile("cli");
+    asm volatile("mov %0, %%ecx\n" :: "r"(eip));
+    asm volatile("mov %0, %%esp\n" :: "r"(esp));
+    asm volatile("mov %0, %%ebp\n" :: "r"(ebp));
+    asm volatile("mov %0, %%cr3\n" :: "r"(current_directory));
+    asm volatile("sti");
 }

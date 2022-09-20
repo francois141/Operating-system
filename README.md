@@ -7,6 +7,8 @@
 
 This is my first operating system written from scratch. It is certainly not very powerful and it probably has several bugs but it allowed me to learn the basics of an operating system and drivers. I wrote it during my bachelor degree. This system is not intended to be functional or perfect. 
 
+Right now I am working on it. It is absolutely normal, if some code is strange right now. This code will become better soon :)
+
 ### Memory map in the RAM
 
 | **Address** | **Memory map**                  |

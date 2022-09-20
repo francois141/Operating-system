@@ -28,6 +28,7 @@ void main()
 
   initialise_tasking();
 
+  //enter_shell();
 
 
   //print("Task running : if two on the screen you won!");
