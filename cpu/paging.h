@@ -7,15 +7,20 @@
 #include "../system_lib/malloc.h"
 #include "../drivers/screen.h"
 
-#define FRAME_TO_ADDRESS(x) (x.aligned_address * 0x1000)
-#define ADDRESS_TO_FRAME(x) ((int)x) >> 12
+#define FRAME_TO_ADDRESS(x) (x << BITS_OFFSET_IN_PAGE)
+#define ADDRESS_TO_FRAME(x) ((u32)x) >> BITS_OFFSET_IN_PAGE
 
 typedef struct page_directory_entry page_directory_entry;
 typedef struct page_table_entry page_table_entry;
 typedef struct page_directory page_directory;
-typedef struct page_table page_table; 
+typedef struct page_table page_table;
+
+#define NB_ENTRIES 1024
+#define BITS_OFFSET_IN_PAGE 12
+#define PAGE_FAULT_INTERRUPT_CODE 14
 
 page_directory *current_directory;
+page_directory *current_directory2;
 
 struct page_directory_entry
 {
@@ -49,12 +54,12 @@ struct page_table_entry
 
 struct page_directory
 {
-    page_directory_entry entries[1024]; // 1024 page_directories entries
+    page_directory_entry entries[NB_ENTRIES]; // 1024 page_directories entries
 };
 
 struct page_table
 {
-    page_table_entry entries[1024];
+    page_table_entry entries[NB_ENTRIES];
 };
 
 void page_fault(registers_t regs);

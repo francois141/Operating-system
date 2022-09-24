@@ -10,7 +10,6 @@ static void timer_callback(registers_t regs)
 {
     tick++;
     if(tick % 1000 == 0){
-        print("Switch task");
         switch_task();
     }
 

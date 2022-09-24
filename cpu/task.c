@@ -4,6 +4,7 @@
 
 volatile task *current_task;
 extern page_directory *current_directory;
+extern page_directory *current_directory2;
 
 void initialise_tasking()
 {
@@ -86,11 +87,11 @@ void switch_task()
     esp = current_task->esp;
     ebp = current_task->ebp;
 
-    
     asm volatile("cli");
     asm volatile("mov %0, %%ecx\n" :: "r"(eip));
     asm volatile("mov %0, %%esp\n" :: "r"(esp));
     asm volatile("mov %0, %%ebp\n" :: "r"(ebp));
-    asm volatile("mov %0, %%cr3\n" :: "r"(current_directory));
+    asm volatile("mov %0, %%cr3\n" :: "r"(current_directory2));
     asm volatile("sti");
+    print("Switch done");
 }

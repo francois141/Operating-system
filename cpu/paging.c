@@ -3,7 +3,7 @@
 
 void page_fault(registers_t regs)
 {
-    print("PAGE FAULT");
+    print("PAGE FAULT\nSYSTEM IS NOW IN AN INFINITE LOOP");
     while(1){};
 }
 
@@ -15,70 +15,70 @@ void initialisePaging()
 
     register_interrupt_handler(14,page_fault);
     switch_page_directory(current_directory);
+
+    current_directory2 = clone_directory(current_directory);
 }
 
 void identity_map_kernel()
 {
     for(int i = 0; i < 10000000; i++)
     {
-        map_frame(i*0x1000,i*0x1000);
+        map_frame(i*NB_ENTRIES,i*NB_ENTRIES);
     }
 }
 
 void switch_page_directory(void* dir)
 {
-    register_interrupt_handler(14, page_fault);
+    register_interrupt_handler(PAGE_FAULT_INTERRUPT_CODE, page_fault);
 
     __asm__ volatile("mov %0, %%cr3"::"r"(dir));
     u32 cr0;
     __asm__ volatile("mov %%cr0, %0": "=r"(cr0));
-    cr0 |= 0x80000000; 
+    cr0 |= 0x80000000;
     __asm__ volatile("mov %0, %%cr0":: "r"(cr0));
 }
 
 void map_frame(u32 va, u32 pa)
 {
     // nothing for the moment
-    u32 base    = (va >> 12) / 1024;
-    u32 offset  = (va >> 12) % 1024;
+    u32 base    = (va >> BITS_OFFSET_IN_PAGE) / NB_ENTRIES;
+    u32 offset  = (va >> BITS_OFFSET_IN_PAGE) % NB_ENTRIES;
 
     if(current_directory->entries[base].present == 0)
     {
         // we need to get some free space
-        u32 alligned_address = malloc_aligned(sizeof(page_table));
+        u32 aligned_address = malloc_aligned(sizeof(page_table));
         current_directory->entries[base].present = 1;
         current_directory->entries[base].rw      = 1;
-        current_directory->entries[base].aligned_address = alligned_address >> 12;
+        current_directory->entries[base].aligned_address = ADDRESS_TO_FRAME(aligned_address);
     }
 
-    page_table* page_table_location = current_directory->entries[base].aligned_address << 12;
+    page_table* page_table_location = FRAME_TO_ADDRESS(current_directory->entries[base].aligned_address);
 
     page_table_location->entries[offset].present = 1;
     page_table_location->entries[offset].rw      = 1;
-    page_table_location->entries[offset].aligned_address = pa >> 12;
+    page_table_location->entries[offset].aligned_address = ADDRESS_TO_FRAME(pa);
 }
 
 
 page_directory *clone_directory(page_directory *src) {
 
-    u32 phys;
     page_directory *dir = (page_directory*)malloc_aligned(sizeof(page_directory));
 
     memset(dir,0,sizeof(page_directory));
 
-    for(int i = 0; i < 1024;i++) {
+    for(int i = 0; i < NB_ENTRIES;i++) {
 
         if(!src->entries[i].present) {
             continue;
         }
 
-        page_table *src_page_table = (page_table*) FRAME_TO_ADDRESS(src->entries[i]);
+        dir->entries[i] = src->entries[i];
+
+        page_table *src_page_table = (page_table*) FRAME_TO_ADDRESS(src->entries[i].aligned_address);
         page_table *copied = clone_table(src_page_table);
 
-        page_directory_entry entry = src->entries[i];
-        entry.aligned_address = ADDRESS_TO_FRAME(copied);
-        
-        dir->entries[i] = entry;
+        dir->entries[i].aligned_address = ADDRESS_TO_FRAME(copied);
     }
 
     return dir;
@@ -91,8 +91,8 @@ page_table *clone_table(page_table *src) {
 
     memset(table,0,sizeof(page_table));
 
-    for(int i = 0; i < 1024; i++) {
-        if(!table->entries[i].present) {
+    for(int i = 0; i < NB_ENTRIES; i++) {
+        if(!src->entries[i].present) {
             continue;
         }
 
