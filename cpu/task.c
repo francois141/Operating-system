@@ -29,6 +29,7 @@ int fork()
 
     task *new_task = (task *)malloc(sizeof(task));
 
+    // TODO : Update the id in the future
     new_task->id = 2;
     new_task->esp = 0;
     new_task->ebp = 0;
@@ -51,11 +52,13 @@ int fork()
         new_task->eip = eip;
         // All finished: Reenable interrupts.
         asm volatile("sti");
+        print("I am the child");
         return current_task->id;
     }
     // if we are the child
     else
     {
+        print("I am the father");
         return 0;
     }
 }
@@ -83,6 +86,8 @@ void switch_task()
     current_task->eip = eip;
     current_task->esp = esp;
     current_task->ebp = ebp;
+
+    // TODO: Update current task
 
     esp = current_task->esp;
     ebp = current_task->ebp;
