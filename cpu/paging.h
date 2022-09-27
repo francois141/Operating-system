@@ -20,7 +20,6 @@ typedef struct page_table page_table;
 #define ADDRESS_TO_FRAME(x) ((u32)x) >> BITS_OFFSET_IN_PAGE
 
 page_directory *current_directory;
-page_directory *current_directory2;
 
 struct page_directory_entry
 {

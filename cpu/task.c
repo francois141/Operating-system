@@ -3,8 +3,8 @@
 #include "paging.h"
 
 volatile task *current_task;
+
 extern page_directory *current_directory;
-extern page_directory *current_directory2;
 
 void initialise_tasking()
 {
@@ -29,12 +29,12 @@ int fork()
 
     task *new_task = (task *)malloc(sizeof(task));
 
-    // TODO : Update the id in the future
     new_task->id = 2;
     new_task->esp = 0;
     new_task->ebp = 0;
     new_task->eip = 0;
     new_task->page_directory = dir;
+    new_task->next = 0;
 
     u32 eip = read_eip();
 
@@ -52,19 +52,19 @@ int fork()
         new_task->eip = eip;
         // All finished: Reenable interrupts.
         asm volatile("sti");
-        print("I am the child");
+        print("I am the father\n");
+        current_task->next = new_task;
         return current_task->id;
     }
     // if we are the child
     else
     {
-        print("I am the father");
+        print("I am the child");
         return 0;
     }
 }
 
-
-// Right now the goal is to perform a single reading of the registers and set the read value again. 
+// Right now the goal is to perform a single reading of the registers and set the read value again.
 // This is a first trivial step in multitasking
 void switch_task()
 {
@@ -78,7 +78,8 @@ void switch_task()
     asm volatile("mov %%ebp, %0"
                  : "=r"(ebp));
 
-    eip = read_eip();   
+    eip = read_eip();
+
 
     if (eip == 0x12345)
         return;
@@ -87,16 +88,23 @@ void switch_task()
     current_task->esp = esp;
     current_task->ebp = ebp;
 
-    // TODO: Update current task
+    if (current_task->next != 0)
+    {
+        print("Next available");
+        current_task = current_task->next;
+        eip = read_eip();
+    }
 
     esp = current_task->esp;
     ebp = current_task->ebp;
 
     asm volatile("cli");
-    asm volatile("mov %0, %%ecx\n" :: "r"(eip));
-    asm volatile("mov %0, %%esp\n" :: "r"(esp));
-    asm volatile("mov %0, %%ebp\n" :: "r"(ebp));
-    asm volatile("mov %0, %%cr3\n" :: "r"(current_directory2));
+    asm volatile("mov %0, %%ecx\n" ::"r"(eip));
+    asm volatile("mov %0, %%esp\n" ::"r"(esp));
+    asm volatile("mov %0, %%ebp\n" ::"r"(ebp));
+    asm volatile("mov %0, %%cr3\n" ::"r"(current_directory));
+    //asm volatile("mov $0x12345, %%eax");
     asm volatile("sti");
+
     print("Switch done");
 }

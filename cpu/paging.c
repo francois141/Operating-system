@@ -15,8 +15,6 @@ void initialisePaging()
 
     register_interrupt_handler(14,page_fault);
     switch_page_directory(current_directory);
-
-    current_directory2 = clone_directory(current_directory);
 }
 
 void identity_map_kernel()

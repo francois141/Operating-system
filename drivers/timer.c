@@ -12,8 +12,6 @@ static void timer_callback(registers_t regs)
     if(tick % 1000 == 0){
         switch_task();
     }
-
-
 }
 
 void init_timer(u32 frequency)
