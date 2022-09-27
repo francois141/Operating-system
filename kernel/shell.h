@@ -16,11 +16,6 @@
 
 #define COMMAND(x) strcmp(x,key_buffer)
 
-typedef struct{
-    //char command;
-    //function_pointer;
-} shell_input;
-
 static char key_buffer[256];
 static int index;
 
@@ -29,6 +24,5 @@ static void parse_command();
 
 void enter_shell();
 void add_key(char input);
-
 
 #endif

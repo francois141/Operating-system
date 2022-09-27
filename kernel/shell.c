@@ -37,7 +37,7 @@ static void parse_command()
             print("vesa : parse all vesa modes\n");
             print("memory : return the physical memory \n");
         }
-        else if(COMMAND("memory")) // this function is hugly it's normal I am testing it
+        else if(COMMAND("memory")) 
         {
             for(int i = 0; i < 24*3;i++)
             {
@@ -51,7 +51,7 @@ static void parse_command()
                 print_byte(*pointer);
             }print("\n");
         }
-        else if(COMMAND("vesa")) // This function is hugly it's normal I am testing it
+        else if(COMMAND("vesa")) 
         {             
             u32 *pointer = 0x100c;
             print_long(*pointer);
