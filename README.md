@@ -46,13 +46,7 @@ Right now I am working on it. It is absolutely normal, if some code is strange r
 
 ### TODO
 
-* Processes
-* User mode
-* Gui
-* System lib
-* Better disk driver
-* File system
-* Sound
+* End processes
 
 ### How to build it
 
