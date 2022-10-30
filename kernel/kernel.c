@@ -26,12 +26,9 @@ void main()
 
   initialisePaging();
 
-  initialise_tasking();
+  // Working on the tasking system
+  //initialise_tasking();
+  //fork();
 
-  fork();
-
-  //enter_shell();
-
-
-  //print("Task running : if two on the screen you won!");
+  enter_shell();
 }
