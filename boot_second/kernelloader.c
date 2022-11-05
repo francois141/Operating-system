@@ -19,18 +19,18 @@ static void port_byte_out(unsigned short port, unsigned char data);
 static unsigned short port_word_in(unsigned short port);
 void read_sectors(uint32_t target_address, uint32_t LBA, uint8_t sector_count);
 
+const u32 kernel_start_address = 0x100000;
 
 void load_kernel()
 {
-    u32 address = 0x100000;
-    read_sectors(address,5,100);
+    read_sectors(kernel_start_address,5,100);
 
     for(int i = 0; i < 10;i++)
     {
         u32*a = 0xa0000+i;
         *a = i % 40;
     }
-    void (*jump_kernel)() = address;
+    void (*jump_kernel)() = kernel_start_address;
     jump_kernel();
 }
 
@@ -54,7 +54,6 @@ void read_sectors(uint32_t target_address, uint32_t LBA, uint8_t sector_count)
 		for(int i=0;i<256;i++)
 			target[i] = port_word_in(0x1F0);
 		target+=256;
-
 	}
 }
 
@@ -62,6 +61,7 @@ static void ATA_wait_BSY()   //Wait for bsy to be 0
 {
 	while(port_byte_in(0x1F7)&STATUS_BSY);
 }
+
 static void ATA_wait_DRQ()  //Wait fot drq to be 1
 {
 	while(!(port_byte_in(0x1F7)&STATUS_RDY));
