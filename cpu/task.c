@@ -50,15 +50,16 @@ int fork()
         new_task->esp = esp;
         new_task->ebp = ebp;
         new_task->eip = eip;
+        current_task->next = new_task;
         // All finished: Reenable interrupts.
         asm volatile("sti");
         print("I am the father\n");
-        current_task->next = new_task;
         return current_task->id;
     }
     // if we are the child
     else
     {
+        asm volatile("sti");
         print("I am the child");
         return 0;
     }
@@ -71,6 +72,8 @@ void switch_task()
     if (!current_task)
         return;
 
+    println("Switching task now");
+
     // Read esp, ebp now for saving later on.
     u32 esp, ebp, eip;
     asm volatile("mov %%esp, %0"
@@ -80,31 +83,36 @@ void switch_task()
 
     eip = read_eip();
 
-
-    if (eip == 0x12345)
+    if (eip == 0x12345) {
+        println("0x12345");
+        asm volatile("sti");
         return;
-
+    }
+        
     current_task->eip = eip;
     current_task->esp = esp;
     current_task->ebp = ebp;
 
     if (current_task->next != 0)
     {
-        print("Next available");
+        println("Next available");
         current_task = current_task->next;
-        eip = read_eip();
     }
 
     esp = current_task->esp;
     ebp = current_task->ebp;
 
+    println("Before switch");
     asm volatile("cli");
-    asm volatile("mov %0, %%ecx\n" ::"r"(eip));
-    asm volatile("mov %0, %%esp\n" ::"r"(esp));
-    asm volatile("mov %0, %%ebp\n" ::"r"(ebp));
-    asm volatile("mov %0, %%cr3\n" ::"r"(current_directory));
-    //asm volatile("mov $0x12345, %%eax");
-    asm volatile("sti");
-
-    print("Switch done");
+    asm volatile (
+			"mov %0, %%ebx\n"
+			"mov %1, %%esp\n"
+			"mov %2, %%ebp\n"
+			"mov $0x12345, %%eax\n"
+			"jmp *%%ebx"
+			: : "r" (eip), "r" (esp), "r" (ebp)
+			: "%ebx", "%esp", "%eax");
 }
+    
+
+

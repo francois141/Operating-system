@@ -27,8 +27,10 @@ void main()
   initialisePaging();
 
   // Working on the tasking system
-  //initialise_tasking();
-  //fork();
+  initialise_tasking();
+  fork();
 
-  enter_shell();
+  while(1) {
+    //print("okay");
+  }
 }
