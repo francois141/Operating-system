@@ -35,6 +35,7 @@ int get_screen_offset_col(int offset);
 int handle_scrolling();
 
 void print(char*);
+void println(char*);
 
 static void new_line();
 

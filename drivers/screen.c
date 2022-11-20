@@ -990,6 +990,12 @@ void print(char* message)
     }
 }
 
+void println(char* message)
+{
+    print(message); 
+    print("\n");
+}
+
 static void new_line()
 {
     screen_settings.cursorY++;
