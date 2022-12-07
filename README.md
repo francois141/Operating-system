@@ -44,9 +44,6 @@ Right now I am working on it. It is absolutely normal, if some code is strange r
 * Setting 1280 * 1024 resolution mode
 * Retrieve physical memory map
 
-### TODO
-
-* End processes
 
 ### How to build it
 
