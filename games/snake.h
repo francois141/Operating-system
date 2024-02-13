@@ -31,7 +31,7 @@ typedef struct{
     u16 y;
 } Food;
 
-Snake snake;
-Food food;
+static Snake snake;
+static Food food;
 
 #endif

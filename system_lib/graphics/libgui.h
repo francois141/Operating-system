@@ -14,7 +14,7 @@ typedef struct{
     u16 height;
 } Screen_parameters;
 
-Screen_parameters screen_parameters;
+static Screen_parameters screen_parameters;
 
 void initialiseLib();
 
