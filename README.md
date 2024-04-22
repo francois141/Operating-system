@@ -56,4 +56,4 @@ You should have qemu, nasm, gcc & g++ installed on your computer. I tried my OS 
 The first tutorial to read | https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
 A webpage with a lot of diverse tutorials  | https://wiki.osdev.org/Expanded_Main_Page
 Another webpage with a lot of ressources | http://www.brokenthorn.com/Resources/OSDevVid2.html
-A tutorial with more advanced stuff | http://www.jamesmolloy.co.uk/tutorial_html/index.html
+A tutorial with more advanced stuff | https://archive.is/dWJGu
